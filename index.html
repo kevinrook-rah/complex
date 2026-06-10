@@ -274,28 +274,6 @@ line-height:1.6;
 margin-bottom:12px;
 }
 
-.contact{
-padding-top:10px;
-margin-top:10px;
-border-top:1px solid #eee;
-}
-
-.contact-name{
-font-size:13px;
-font-weight:600;
-}
-
-.contact-role{
-font-size:12px;
-color:#888780;
-}
-
-.contact-email{
-font-size:12px;
-color:#1D9E75;
-margin-top:4px;
-}
-
 .badge{
 display:inline-block;
 font-size:11px;
@@ -470,15 +448,23 @@ Provider engagement sessions, networking forums and local NHS events.
 GOOGLE CUSTOM SEARCH CONFIG
 ========================================================
 
-1. Create Google Programmable Search Engine
-2. Enable Custom Search JSON API
-3. Add your API key + CX below
+1. Go to:
+https://programmablesearchengine.google.com/
+
+2. Create a search engine
+
+3. Enable:
+Custom Search JSON API
+
+4. Paste credentials below
 
 ========================================================
 */
 
-const GOOGLE_API_KEY = 'PASTE_GOOGLE_API_KEY';
-const GOOGLE_CX = 'PASTE_SEARCH_ENGINE_ID';
+const GOOGLE_API_KEY = 'PASTE_GOOGLE_API_KEY_HERE';
+const GOOGLE_CX = 'PASTE_SEARCH_ENGINE_ID_HERE';
+
+/* CLEANED LOCATION LIST */
 
 const RAH_LOCATIONS = [
 "Ards & North Down",
@@ -505,7 +491,6 @@ const RAH_LOCATIONS = [
 "Chichester & Bognor Regis",
 "Colchester",
 "Croydon",
-"Barnet & Edgware",
 "Dartford & Bexley",
 "Derby",
 "Dundee, Angus & North Fife",
@@ -516,6 +501,7 @@ const RAH_LOCATIONS = [
 "Esher, Leatherhead & Dorking",
 "Exeter & Exmouth",
 "Grantham, Newark & Melton Mowbray",
+"Gravesend",
 "Guildford & Farnham",
 "Harrogate",
 "Harrow",
@@ -532,6 +518,7 @@ const RAH_LOCATIONS = [
 "Loughton",
 "Lymm & Warrington South",
 "Maidenhead",
+"Maidstone",
 "Medway",
 "Mid Cheshire",
 "Mid Hampshire",
@@ -566,10 +553,8 @@ const RAH_LOCATIONS = [
 "Tyneside",
 "Wandsworth & Lambeth",
 "Welwyn, Hatfield and St Albans",
-"Maidstone",
 "Wimbledon, Putney and Kingston",
-"Worthing & Shoreham District",
-"Gravesend"
+"Worthing & Shoreham District"
 ].sort();
 
 let state = {
@@ -784,8 +769,25 @@ ${item.snippet || ''}
 </div>
 
 <a href="${item.link}"
-target="_blank"
-style="font-size:12px;color:#1D9ync function loadIntelligence(loc){
+target="_blankl-link"></i>
+Visit website
+
+</a>
+
+</div>
+`;
+
+});
+
+}
+
+html += `</div>`;
+
+return html;
+
+}
+
+async function loadIntelligence(loc){
 
 $('intel-title').textContent =
 'Your referral landscape — ' + loc;
