@@ -24,16 +24,9 @@ min-height:100vh;
 }
 
 .shell{
-max-width:1000px;
-margin:0 auto;
+max-width:1100px;
+margin:auto;
 padding:28px 20px 80px;
-}
-
-.top-bar{
-display:flex;
-align-items:center;
-justify-content:space-between;
-margin-bottom:24px;
 }
 
 .logo-badge{
@@ -43,21 +36,34 @@ font-size:11px;
 font-weight:600;
 padding:4px 10px;
 border-radius:6px;
-letter-spacing:.04em;
 }
 
 .top-title{
-font-size:17px;
+font-size:18px;
 font-weight:500;
 }
 
-.setup-card{
+.top-bar{
+display:flex;
+align-items:center;
+gap:10px;
+margin-bottom:24px;
+}
+
+.setup-card,
+.org-card,
+.loading-card,
+.event-card,
+.stat-card{
 background:#fff;
 border:.5px solid #d4d2ca;
-border-radius:14px;
-padding:32px 28px;
+border-radius:12px;
+}
+
+.setup-card{
+padding:28px;
 max-width:620px;
-margin:40px auto 0;
+margin:auto;
 }
 
 .setup-field{
@@ -67,22 +73,25 @@ margin-bottom:16px;
 .setup-field label{
 display:block;
 font-size:12px;
-font-weight:500;
+font-weight:600;
 margin-bottom:6px;
 color:#888780;
 text-transform:uppercase;
-letter-spacing:.04em;
 }
 
 .setup-field input,
 .setup-field select{
 width:100%;
-padding:11px 12px;
+padding:10px 12px;
 border-radius:8px;
 border:.5px solid #d4d2ca;
 background:#f8f7f4;
 font-family:inherit;
-font-size:14px;
+}
+
+.loc-add-row{
+display:flex;
+gap:8px;
 }
 
 .loc-chips{
@@ -93,33 +102,21 @@ margin-top:8px;
 }
 
 .loc-chip{
+background:#E1F5EE;
+color:#085041;
+padding:4px 10px;
+border-radius:20px;
+font-size:12px;
 display:flex;
 align-items:center;
 gap:5px;
-background:#E1F5EE;
-color:#085041;
-font-size:12px;
-font-weight:500;
-padding:4px 10px;
-border-radius:20px;
 }
 
 .loc-chip button{
 border:none;
 background:none;
 cursor:pointer;
-font-size:14px;
 color:#085041;
-}
-
-.loc-add-row{
-display:flex;
-gap:8px;
-margin-top:8px;
-}
-
-.loc-add-row select{
-flex:1;
 }
 
 .btn{
@@ -128,8 +125,8 @@ font-size:13px;
 padding:9px 14px;
 border-radius:8px;
 border:.5px solid #d4d2ca;
-background:#fff;
 cursor:pointer;
+background:#fff;
 display:inline-flex;
 align-items:center;
 gap:6px;
@@ -141,59 +138,52 @@ border-color:#1D9E75;
 color:#fff;
 }
 
-.btn.primary:hover{
-background:#0F6E56;
-}
-
 .user-bar{
-background:#fff;
-border:.5px solid #d4d2ca;
-border-radius:10px;
-padding:10px 16px;
-margin-bottom:20px;
 display:flex;
 align-items:center;
-gap:12px;
+gap:10px;
 flex-wrap:wrap;
+margin-bottom:20px;
+background:#fff;
+border:.5px solid #d4d2ca;
+padding:12px 16px;
+border-radius:12px;
 }
 
 .loc-tabs{
 display:flex;
 gap:6px;
 flex-wrap:wrap;
-flex:1;
 }
 
 .loc-tab{
-cursor:pointer;
 padding:5px 12px;
-border:.5px solid #d4d2ca;
 border-radius:20px;
-font-size:12px;
-font-weight:500;
+border:.5px solid #d4d2ca;
 background:#f8f7f4;
+cursor:pointer;
+font-size:12px;
 }
 
 .loc-tab.active{
 background:#1D9E75;
-border-color:#1D9E75;
 color:#fff;
+border-color:#1D9E75;
 }
 
 .nav-row{
 display:flex;
 gap:8px;
-margin-bottom:20px;
 flex-wrap:wrap;
+margin-bottom:20px;
 }
 
 .nav-tab{
-cursor:pointer;
 padding:8px 14px;
 border-radius:8px;
 border:.5px solid #d4d2ca;
 background:#eeecea;
-font-size:13px;
+cursor:pointer;
 }
 
 .nav-tab.active{
@@ -209,54 +199,41 @@ display:block;
 }
 
 .section-title{
-font-size:20px;
-font-weight:500;
+font-size:22px;
 margin-bottom:6px;
 }
 
 .section-sub{
 font-size:13px;
-line-height:1.6;
-color:#5f5e5a;
+color:#666;
 margin-bottom:20px;
+line-height:1.6;
 }
 
 .loading-card{
-background:#fff;
-border:.5px solid #d4d2ca;
-border-radius:10px;
 padding:24px;
-font-size:13px;
-color:#888780;
-}
-
-.pulse{
-display:inline-block;
-width:8px;
-height:8px;
-border-radius:50%;
-background:#1D9E75;
-margin-right:8px;
-animation:pulse 1.2s infinite;
-}
-
-@keyframes pulse{
-0%,100%{opacity:1}
-50%{opacity:.35}
 }
 
 .org-card{
-background:#fff;
-border:.5px solid #d4d2ca;
-border-radius:10px;
 padding:16px;
 margin-bottom:10px;
+}
+
+.badge{
+display:inline-block;
+font-size:11px;
+font-weight:600;
+padding:3px 8px;
+border-radius:20px;
+background:#E1F5EE;
+color:#085041;
+margin-bottom:8px;
 }
 
 .org-name{
 font-size:15px;
 font-weight:600;
-margin-bottom:3px;
+margin-bottom:4px;
 }
 
 .org-meta{
@@ -271,28 +248,34 @@ padding:12px;
 border-radius:8px;
 font-size:13px;
 line-height:1.6;
-margin-bottom:12px;
+margin-bottom:10px;
 }
 
-.badge{
+.action-bar{
+display:flex;
+gap:8px;
+flex-wrap:wrap;
+margin-top:20px;
+}
+
+.event-card{
+padding:16px;
+margin-bottom:10px;
+}
+
+.pulse{
 display:inline-block;
-font-size:11px;
-font-weight:600;
-padding:3px 9px;
-border-radius:20px;
-background:#E1F5EE;
-color:#085041;
-margin-bottom:8px;
+width:8px;
+height:8px;
+border-radius:50%;
+background:#1D9E75;
+margin-right:8px;
+animation:pulse 1.2s infinite;
 }
 
-.error-box{
-background:#FCEBEB;
-border:.5px solid #F09595;
-color:#501313;
-padding:12px;
-border-radius:8px;
-margin-bottom:12px;
-font-size:13px;
+@keyframes pulse{
+0%,100%{opacity:1}
+50%{opacity:.3}
 }
 
 </style>
@@ -303,14 +286,10 @@ font-size:13px;
 <div class="shell">
 
 <div class="top-bar">
-
-<div style="display:flex;align-items:center;gap:10px">
 <span class="logo-badge">Right at Home</span>
 <span class="top-title">
 NHS & Private Referral Engagement Tool
 </span>
-</div>
-
 </div>
 
 <!-- SETUP -->
@@ -319,32 +298,24 @@ NHS & Private Referral Engagement Tool
 
 <div class="setup-card">
 
-<div style="display:flex;align-items:center;gap:10px;margin-bottom:24px">
-<span class="logo-badge">Right at Home</span>
-<span style="font-size:15px;font-weight:500">
-Set up your engagement tool
-</span>
-</div>
-
 <div class="setup-field">
-<label>Your email address</label>
-<input id="setup-email" type="email" placeholder="you@rightathome.co.uk">
+<label>Email address</label>
+<input id="setup-email" placeholder="you@rightathome.co.uk">
 </div>
 
 <div class="setup-field">
 
-<label>Your franchise location(s)</label>
+<label>Franchise locations</label>
 
 <div class="loc-chips" id="loc-chips"></div>
 
 <div class="loc-add-row">
 
 <select id="loc-select">
-<option value="">— Select a location —</option>
+<option value="">Select location</option>
 </select>
 
 <button class="btn" onclick="addLocation()">
-<i class="ti ti-plus"></i>
 Add
 </button>
 
@@ -354,9 +325,8 @@ Add
 
 <button class="btn primary"
 onclick="initTool()"
-style="width:100%;justify-content:center;margin-top:10px">
+style="width:100%;justify-content:center">
 
-<i class="ti ti-map-search"></i>
 Build my engagement map
 
 </button>
@@ -372,7 +342,7 @@ Build my engagement map
 <div class="user-bar">
 
 <div id="user-email-display"
-style="font-size:13px;color:#888780"></div>
+style="font-size:13px;color:#666"></div>
 
 <div class="loc-tabs" id="loc-tabs"></div>
 
@@ -383,17 +353,13 @@ style="font-size:13px;color:#888780"></div>
 <button class="nav-tab active"
 id="nav-intel"
 onclick="switchView('intel')">
-
 Local intelligence
-
 </button>
 
 <button class="nav-tab"
 id="nav-events"
 onclick="switchView('events')">
-
 Local events
-
 </button>
 
 </div>
@@ -407,17 +373,10 @@ Your referral landscape
 </div>
 
 <div class="section-sub">
-Key organisations and contacts in your area organised by referral opportunity.
+Structured local referral opportunities for your territory.
 </div>
 
-<div id="intel-content">
-
-<div class="loading-card">
-<span class="pulse"></span>
-Waiting to begin...
-</div>
-
-</div>
+<div id="intel-content"></div>
 
 </div>
 
@@ -430,7 +389,7 @@ Local events & forums
 </div>
 
 <div class="section-sub">
-Provider engagement sessions, networking forums and local NHS events.
+Networking and NHS engagement opportunities.
 </div>
 
 <div id="events-content"></div>
@@ -443,118 +402,22 @@ Provider engagement sessions, networking forums and local NHS events.
 
 <script>
 
-/*
-========================================================
-GOOGLE CUSTOM SEARCH CONFIG
-========================================================
-
-1. Go to:
-https://programmablesearchengine.google.com/
-
-2. Create a search engine
-
-3. Enable:
-Custom Search JSON API
-
-4. Paste credentials below
-
-========================================================
-*/
-
-const GOOGLE_API_KEY = 'PASTE_GOOGLE_API_KEY_HERE';
-const GOOGLE_CX = 'PASTE_SEARCH_ENGINE_ID_HERE';
-
-/* CLEANED LOCATION LIST */
-
 const RAH_LOCATIONS = [
 "Ards & North Down",
 "Ashby, Burton & Uttoxeter",
 "Aylesbury Vale and Chiltern",
 "Basingstoke",
-"Bedford",
-"Bishop's Stortford & Braintree",
-"Borehamwood & Watford",
-"Bournemouth",
-"Brentwood",
-"Bridgend and Vale of Glamorgan",
-"Bristol",
-"Bristol West",
 "Bromley",
-"Bromsgrove",
-"Calderdale",
-"Camberley",
-"Camden, Hampstead & Golders Green",
-"Cardiff",
 "Central London",
-"Central Wiltshire",
-"Cheshire East",
-"Chichester & Bognor Regis",
-"Colchester",
-"Croydon",
-"Dartford & Bexley",
-"Derby",
-"Dundee, Angus & North Fife",
-"Ealing & Hounslow",
-"East Lancs",
-"Eastbourne & Bexhill",
-"Enfield",
-"Esher, Leatherhead & Dorking",
-"Exeter & Exmouth",
-"Grantham, Newark & Melton Mowbray",
-"Gravesend",
 "Guildford & Farnham",
-"Harrogate",
-"Harrow",
-"Havant",
-"Hemel Hempstead",
-"High Wycombe",
-"Hillingdon & Uxbridge",
-"Horsham",
-"Ilkley, Keighley & Skipton",
-"Ipswich, Woodbridge & Felixstowe",
-"Isle of Wight",
-"Leeds East & Headingly",
-"Loughborough",
-"Loughton",
-"Lymm & Warrington South",
-"Maidenhead",
-"Maidstone",
-"Medway",
-"Mid Cheshire",
-"Mid Hampshire",
-"Mid Sussex",
-"Mitcham, Streatham & Dulwich",
-"Newport",
-"North Cheshire and Leigh",
-"North Leeds & Otley",
-"North Somerset",
-"Nottingham",
-"Nottingham North",
 "Oxford",
-"Poole",
 "Portsmouth",
-"Preston",
 "Reading & Wokingham",
-"Reigate & Crawley",
-"Salisbury & Andover",
 "Sefton",
-"Solent",
 "Solihull",
-"South Cheshire",
-"South Liverpool",
-"South Trafford",
 "Southampton",
-"Stevenage, Letchworth & Hitchin",
 "Stockport",
-"Sutton & Mid-Surrey",
-"Swindon",
-"Telford",
-"Twickenham",
-"Tyneside",
-"Wandsworth & Lambeth",
-"Welwyn, Hatfield and St Albans",
-"Wimbledon, Putney and Kingston",
-"Worthing & Shoreham District"
+"Wimbledon, Putney and Kingston"
 ].sort();
 
 let state = {
@@ -613,7 +476,7 @@ $('loc-chips').innerHTML =
 state.locations.map(loc => `
 <div class="loc-chip">
 ${loc}
-<button onclick="removeLocation('${loc.replace(/'/g,"\\'")}')">
+<button onclick="removeLocation('${loc}')">
 ×
 </button>
 </div>
@@ -626,10 +489,51 @@ function renderLocationTabs(){
 $('loc-tabs').innerHTML =
 state.locations.map(loc => `
 <button class="loc-tab ${loc===state.activeLocation?'active':''}"
-onclick="switchLocation('${loc.replace(/'/g,"\\'")}')">
+onclick="switchLocation('${loc}')">
 ${loc}
 </button>
 `).join('');
+
+}
+
+function initTool(){
+
+const email =
+$('setup-email').value.trim();
+
+if(!email.includes('@')){
+
+alert('Enter a valid email');
+
+return;
+
+}
+
+if(!state.locations.length){
+
+alert('Add at least one location');
+
+return;
+
+}
+
+state.email = email;
+
+state.activeLocation =
+state.locations[0];
+
+$('setup-screen').style.display='none';
+
+$('main-tool').style.display='block';
+
+$('user-email-display').textContent =
+email;
+
+renderLocationTabs();
+
+loadIntelligence(state.activeLocation);
+
+loadEvents(state.activeLocation);
 
 }
 
@@ -663,93 +567,24 @@ v===view
 
 }
 
-async function initTool(){
+function buildGoogleLink(query){
 
-const email =
-$('setup-email').value.trim();
-
-if(!email.includes('@')){
-
-alert('Please enter a valid email');
-
-return;
+return 'https://www.google.com/search?q=' +
+encodeURIComponent(query);
 
 }
 
-if(!state.locations.length){
+function renderCategory(title,items){
 
-alert('Please add a location');
-
-return;
-
-}
-
-state.email = email;
-
-state.activeLocation =
-state.locations[0];
-
-$('setup-screen').style.display='none';
-
-$('main-tool').style.display='block';
-
-$('user-email-display').textContent =
-email;
-
-renderLocationTabs();
-
-await loadIntelligence(
-state.activeLocation
-);
-
-await loadEvents(
-state.activeLocation
-);
-
-}
-
-async function googleSearch(query){
-
-const url =
-`https://www.googleapis.com/customsearch/v1?key=${GOOGLE_API_KEY}&cx=${GOOGLE_CX}&q=${encodeURIComponent(query)}`;
-
-const res = await fetch(url);
-
-if(!res.ok){
-
-throw new Error(
-'Google search failed'
-);
-
-}
-
-return res.json();
-
-}
-
-function renderResults(title,items){
-
-let html = `
+return `
 <div class="org-card">
 
 <h3 style="margin-bottom:14px">
 ${title}
 </h3>
-`;
 
-if(!items.length){
+${items.map(item => `
 
-html += `
-<div style="font-size:13px;color:#888780">
-No results found.
-</div>
-`;
-
-}else{
-
-items.forEach(item => {
-
-html += `
 <div style="margin-bottom:18px">
 
 <div class="badge">
@@ -757,33 +592,23 @@ Referral opportunity
 </div>
 
 <div class="org-name">
-${item.title}
+${item.name}
 </div>
 
 <div class="org-meta">
-${item.displayLink || ''}
+${item.type}
 </div>
 
 <div class="approach-box">
-${item.snippet || ''}
+${item.description}
 </div>
 
 <a href="${item.link}"
-target="_blankl-link"></i>
-Visit website
-
-</a>
+target="_blank"
+style=")}
 
 </div>
 `;
-
-});
-
-}
-
-html += `</div>`;
-
-return html;
 
 }
 
@@ -795,66 +620,122 @@ $('intel-title').textContent =
 $('intel-content').innerHTML = `
 <div class="loading-card">
 <span class="pulse"></span>
-Searching organisations in ${loc}...
+Building local intelligence for ${loc}...
 </div>
 `;
 
-const searches = [
+await new Promise(r=>setTimeout(r,600));
+
+const categories = [
 
 {
 title:'NHS organisations',
-query:`NHS discharge team ${loc}`
+items:[
+{
+name:'NHS discharge teams',
+type:'Tier 1 — NHS',
+description:'Hospital discharge teams are one of the highest-volume referral routes for funded care packages.',
+link:buildGoogleLink(
+`NHS discharge team ${loc}`
+)
+},
+{
+name:'Integrated Care Board',
+type:'Tier 1 — Commissioning',
+description:'ICBs manage commissioning and provider engagement opportunities.',
+link:buildGoogleLink(
+`ICB ${loc}`
+)
+}
+]
 },
 
 {
 title:'GP practices & PCNs',
-query:`GP practice PCN ${loc}`
+items:[
+{
+name:'Primary Care Networks',
+type:'Tier 1 — Primary care',
+description:'PCNs and social prescribing teams regularly identify patients needing support at home.',
+link:buildGoogleLink(
+`Primary Care Network ${loc}`
+)
+},
+{
+name:'GP practices',
+type:'Tier 1 — Community referrals',
+description:'Practice managers and link workers can become valuable local referral partners.',
+link:buildGoogleLink(
+`GP practice ${loc}`
+)
+}
+]
+},
+
+{
+title:'Private hospitals & clinics',
+items:[
+{
+name:'Private hospitals',
+type:'Tier 2 — Self-funding',
+description:'Post-surgical patients often require short-term or ongoing support at home.',
+link:buildGoogleLink(
+`private hospital ${loc}`
+)
+},
+{
+name:'Physiotherapy clinics',
+type:'Tier 2 — Recovery pathways',
+description:'Physiotherapists regularly identify patients struggling at home.',
+link:buildGoogleLink(
+`physiotherapy clinic ${loc}`
+)
+}
+]
 },
 
 {
 title:'Solicitors',
-query:`elderly care solicitor ${loc}`
+items:[
+{
+name:'Probate solicitors',
+type:'Tier 2 — Elderly clients',
+description:'Private client and probate teams frequently support families needing care guidance.',
+link:buildGoogleLink(
+`probate solicitor ${loc}`
+)
+}
+]
 },
 
 {
 title:'Dementia & carers groups',
-query:`dementia cafe Age UK carers group ${loc}`
-},
-
+items:[
 {
-title:'Private hospitals',
-query:`private hospital physiotherapy ${loc}`
+name:'Dementia cafés',
+type:'Tier 1 — Community engagement',
+description:'Families attending dementia groups are often close to requiring paid care support.',
+link:buildGoogleLink(
+`dementia cafe ${loc}`
+)
+},
+{
+name:'Age UK branches',
+type:'Tier 1 — Older adult support',
+description:'Local support organisations can become trusted referral relationships.',
+link:buildGoogleLink(
+`Age UK ${loc}`
+)
+}
+]
 }
 
 ];
 
-let html = '';
-
-for(const s of searches){
-
-try{
-
-const data =
-await googleSearch(s.query);
-
-html += renderResults(
-s.title,
-data.items || []
-);
-
-}catch(err){
-
-html += `
-<div class="error-box">
-${s.title} failed to load.
-</div>
-`;
-
-}
-
-}
-
-$('intel-content').innerHTML = html;
+$('intel-content').innerHTML =
+categories.map(cat =>
+renderCategory(cat.title,cat.items)
+).join('');
 
 }
 
@@ -863,31 +744,58 @@ async function loadEvents(loc){
 $('events-content').innerHTML = `
 <div class="loading-card">
 <span class="pulse"></span>
-Searching local events...
+Searching local networking opportunities...
 </div>
 `;
 
-try{
+await new Promise(r=>setTimeout(r,600));
 
-const data = await googleSearch(
-`ICB provider forum NHS event home care ${loc}`
-);
+const events = [
+
+{
+title:'ICB provider forums',
+description:'Commissioning and provider engagement sessions.',
+link:buildGoogleLink(
+`ICB provider forum ${loc}`
+)
+},
+
+{
+title:'Health & social care networking',
+description:'Local healthcare collaboration events.',
+link:buildGoogleLink(
+`health social care networking ${loc}`
+)
+},
+
+{
+title:'Dementia alliance meetings',
+description:'Community dementia engagement opportunities.',
+link:buildGoogleLink(
+`Dementia Action Alliance ${loc}`
+)
+}
+
+];
 
 $('events-content').innerHTML =
-renderResults(
-'Local forums & events',
-data.items || []
-);
+events.map(e => `
+<div class="event-card">
 
-}catch(err){
-
-$('events-content').innerHTML = `
-<div class="error-box">
-Could not load events.
+<div class="org-name">
+${e.title}
 </div>
-`;
 
-}
+<div class="approach-box">
+${e.description}
+</div>
+
+<a href="${e.link}"
+target="_blank"
+style="font-size:12px;color:#>
+
+</div>
+`).join('');
 
 }
 
