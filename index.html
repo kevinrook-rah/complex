@@ -3,128 +3,320 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Right at Home Referral Engagement Tool</title>
+
+<title>Right at Home — NHS & Private Referral Engagement Tool</title>
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.6.0/dist/tabler-icons.min.css">
 
 <style>
+
+*,*::before,*::after{
+box-sizing:border-box;
+margin:0;
+padding:0;
+}
+
 body{
-  font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
-  background:#f8f7f4;
-  color:#1a1a18;
-  margin:0;
-  padding:0;
+font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+background:#f8f7f4;
+color:#1a1a18;
+min-height:100vh;
 }
 
 .shell{
-  max-width:1000px;
-  margin:auto;
-  padding:30px 20px 80px;
+max-width:1000px;
+margin:0 auto;
+padding:28px 20px 80px;
 }
 
-.logo{
-  display:inline-block;
-  background:#1D9E75;
-  color:#fff;
-  padding:5px 12px;
-  border-radius:6px;
-  font-size:12px;
-  font-weight:600;
+.top-bar{
+display:flex;
+align-items:center;
+justify-content:space-between;
+margin-bottom:24px;
 }
 
-h1{
-  font-size:24px;
-  margin:16px 0 6px;
+.logo-badge{
+background:#1D9E75;
+color:#fff;
+font-size:11px;
+font-weight:600;
+padding:4px 10px;
+border-radius:6px;
+letter-spacing:.04em;
 }
 
-.sub{
-  color:#666;
-  margin-bottom:24px;
+.top-title{
+font-size:17px;
+font-weight:500;
 }
 
-.card{
-  background:#fff;
-  border:1px solid #ddd;
-  border-radius:12px;
-  padding:18px;
-  margin-bottom:16px;
+.setup-card{
+background:#fff;
+border:.5px solid #d4d2ca;
+border-radius:14px;
+padding:32px 28px;
+max-width:620px;
+margin:40px auto 0;
 }
 
-input,select{
-  width:100%;
-  padding:12px;
-  border-radius:8px;
-  border:1px solid #ccc;
-  font-size:14px;
-  margin-top:6px;
-  margin-bottom:16px;
-  box-sizing:border-box;
+.setup-field{
+margin-bottom:16px;
 }
 
-button{
-  background:#1D9E75;
-  color:#fff;
-  border:none;
-  padding:12px 16px;
-  border-radius:8px;
-  cursor:pointer;
-  font-size:14px;
+.setup-field label{
+display:block;
+font-size:12px;
+font-weight:500;
+margin-bottom:6px;
+color:#888780;
+text-transform:uppercase;
+letter-spacing:.04em;
 }
 
-button:hover{
-  background:#15785a;
+.setup-field input,
+.setup-field select{
+width:100%;
+padding:11px 12px;
+border-radius:8px;
+border:.5px solid #d4d2ca;
+background:#f8f7f4;
+font-family:inherit;
+font-size:14px;
 }
 
-.loading{
-  background:#fff;
-  border-radius:10px;
-  padding:18px;
-  margin-top:16px;
-  border:1px solid #ddd;
+.loc-chips{
+display:flex;
+flex-wrap:wrap;
+gap:6px;
+margin-top:8px;
 }
 
-.result{
-  background:#fff;
-  border-radius:10px;
-  padding:16px;
-  margin-top:12px;
-  border:1px solid #ddd;
+.loc-chip{
+display:flex;
+align-items:center;
+gap:5px;
+background:#E1F5EE;
+color:#085041;
+font-size:12px;
+font-weight:500;
+padding:4px 10px;
+border-radius:20px;
 }
 
-.result h3{
-  margin-top:0;
+.loc-chip button{
+border:none;
+background:none;
+cursor:pointer;
+font-size:14px;
+color:#085041;
 }
 
-.badge{
-  display:inline-block;
-  background:#E1F5EE;
-  color:#085041;
-  padding:4px 8px;
-  border-radius:20px;
-  font-size:11px;
-  margin-bottom:8px;
+.loc-add-row{
+display:flex;
+gap:8px;
+margin-top:8px;
+}
+
+.loc-add-row select{
+flex:1;
+}
+
+.btn{
+font-family:inherit;
+font-size:13px;
+padding:9px 14px;
+border-radius:8px;
+border:.5px solid #d4d2ca;
+background:#fff;
+cursor:pointer;
+display:inline-flex;
+align-items:center;
+gap:6px;
+}
+
+.btn.primary{
+background:#1D9E75;
+border-color:#1D9E75;
+color:#fff;
+}
+
+.btn.primary:hover{
+background:#0F6E56;
+}
+
+.user-bar{
+background:#fff;
+border:.5px solid #d4d2ca;
+border-radius:10px;
+padding:10px 16px;
+margin-bottom:20px;
+display:flex;
+align-items:center;
+gap:12px;
+flex-wrap:wrap;
+}
+
+.loc-tabs{
+display:flex;
+gap:6px;
+flex-wrap:wrap;
+flex:1;
+}
+
+.loc-tab{
+cursor:pointer;
+padding:5px 12px;
+border:.5px solid #d4d2ca;
+border-radius:20px;
+font-size:12px;
+font-weight:500;
+background:#f8f7f4;
+}
+
+.loc-tab.active{
+background:#1D9E75;
+border-color:#1D9E75;
+color:#fff;
+}
+
+.nav-row{
+display:flex;
+gap:8px;
+margin-bottom:20px;
+flex-wrap:wrap;
+}
+
+.nav-tab{
+cursor:pointer;
+padding:8px 14px;
+border-radius:8px;
+border:.5px solid #d4d2ca;
+background:#eeecea;
+font-size:13px;
+}
+
+.nav-tab.active{
+background:#fff;
+}
+
+.view{
+display:none;
+}
+
+.view.active{
+display:block;
+}
+
+.section-title{
+font-size:20px;
+font-weight:500;
+margin-bottom:6px;
+}
+
+.section-sub{
+font-size:13px;
+line-height:1.6;
+color:#5f5e5a;
+margin-bottom:20px;
+}
+
+.loading-card{
+background:#fff;
+border:.5px solid #d4d2ca;
+border-radius:10px;
+padding:24px;
+font-size:13px;
+color:#888780;
+}
+
+.pulse{
+display:inline-block;
+width:8px;
+height:8px;
+border-radius:50%;
+background:#1D9E75;
+margin-right:8px;
+animation:pulse 1.2s infinite;
+}
+
+@keyframes pulse{
+0%,100%{opacity:1}
+50%{opacity:.35}
+}
+
+.org-card{
+background:#fff;
+border:.5px solid #d4d2ca;
+border-radius:10px;
+padding:16px;
+margin-bottom:10px;
+}
+
+.org-name{
+font-size:15px;
+font-weight:600;
+margin-bottom:3px;
+}
+
+.org-meta{
+font-size:12px;
+color:#888780;
+margin-bottom:10px;
+}
+
+.approach-box{
+background:#f8f7f4;
+padding:12px;
+border-radius:8px;
+font-size:13px;
+line-height:1.6;
+margin-bottom:12px;
 }
 
 .contact{
-  padding:10px;
-  background:#f8f7f4;
-  border-radius:8px;
-  margin-top:10px;
+padding-top:10px;
+margin-top:10px;
+border-top:1px solid #eee;
 }
 
-.small{
-  font-size:13px;
-  color:#666;
+.contact-name{
+font-size:13px;
+font-weight:600;
 }
 
-.error{
-  background:#FCEBEB;
-  border:1px solid #F09595;
-  color:#501313;
-  padding:12px;
-  border-radius:8px;
-  margin-top:16px;
+.contact-role{
+font-size:12px;
+color:#888780;
 }
+
+.contact-email{
+font-size:12px;
+color:#1D9E75;
+margin-top:4px;
+}
+
+.badge{
+display:inline-block;
+font-size:11px;
+font-weight:600;
+padding:3px 9px;
+border-radius:20px;
+background:#E1F5EE;
+color:#085041;
+margin-bottom:8px;
+}
+
+.error-box{
+background:#FCEBEB;
+border:.5px solid #F09595;
+color:#501313;
+padding:12px;
+border-radius:8px;
+margin-bottom:12px;
+font-size:13px;
+}
+
 </style>
 </head>
 
@@ -132,391 +324,569 @@ button:hover{
 
 <div class="shell">
 
-<span class="logo">Right at Home</span>
+<div class="top-bar">
 
-<h1>NHS & Private Referral Engagement Tool</h1>
-
-<div class="sub">
-Search local referral opportunities safely without hitting Anthropic rate limits.
+<div style="display:flex;align-items:center;gap:10px">
+<span class="logo-badge">Right at Home</span>
+<span class="top-title">
+NHS & Private Referral Engagement Tool
+</span>
 </div>
 
-<div class="card">
+</div>
 
-<label>Your Anthropic API Key</label>
-<input id="apiKey" type="password" placeholder="sk-ant-api03-...">
+<!-- SETUP -->
 
-<label>Your Territory</label>
-<select id="location">
-<option value="Stockport">Stockport</option>
-<option value="Sefton">Sefton</option>
-<option value="Bromley">Bromley</option>
-<option value="Oxford">Oxford</option>
-<option value="Central London">Central London</option>
-<option value="Reading & Wokingham">Reading & Wokingham</option>
-<option value="Solihull">Solihull</option>
-<option value="Portsmouth">Portsmouth</option>
+<div id="setup-screen">
+
+<div class="setup-card">
+
+<div style="display:flex;align-items:center;gap:10px;margin-bottom:24px">
+<span class="logo-badge">Right at Home</span>
+<span style="font-size:15px;font-weight:500">
+Set up your engagement tool
+</span>
+</div>
+
+<div class="setup-field">
+<label>Your email address</label>
+<input id="setup-email" type="email" placeholder="you@rightathome.co.uk">
+</div>
+
+<div class="setup-field">
+
+<label>Your franchise location(s)</label>
+
+<div class="loc-chips" id="loc-chips"></div>
+
+<div class="loc-add-row">
+
+<select id="loc-select">
+<option value="">— Select a location —</option>
 </select>
 
-<button onclick="runSearch()">
-<i class="ti ti-search"></i>
-Build Engagement Map
+<button class="btn" onclick="addLocation()">
+<i class="ti ti-plus"></i>
+Add
 </button>
 
 </div>
 
-<div id="status"></div>
+</div>
 
-<div id="results"></div>
+<button class="btn primary"
+onclick="initTool()"
+style="width:100%;justify-content:center;margin-top:10px">
+
+<i class="ti ti-map-search"></i>
+Build my engagement map
+
+</button>
+
+</div>
+
+</div>
+
+<!-- MAIN -->
+
+<div id="main-tool" style="display:none">
+
+<div class="user-bar">
+
+<div id="user-email-display"
+style="font-size:13px;color:#888780"></div>
+
+<div class="loc-tabs" id="loc-tabs"></div>
+
+</div>
+
+<div class="nav-row">
+
+<button class="nav-tab active"
+id="nav-intel"
+onclick="switchView('intel')">
+
+Local intelligence
+
+</button>
+
+<button class="nav-tab"
+id="nav-events"
+onclick="switchView('events')">
+
+Local events
+
+</button>
+
+</div>
+
+<!-- INTEL -->
+
+<div class="view active" id="view-intel">
+
+<div class="section-title" id="intel-title">
+Your referral landscape
+</div>
+
+<div class="section-sub">
+Key organisations and contacts in your area organised by referral opportunity.
+</div>
+
+<div id="intel-content">
+
+<div class="loading-card">
+<span class="pulse"></span>
+Waiting to begin...
+</div>
+
+</div>
+
+</div>
+
+<!-- EVENTS -->
+
+<div class="view" id="view-events">
+
+<div class="section-title">
+Local events & forums
+</div>
+
+<div class="section-sub">
+Provider engagement sessions, networking forums and local NHS events.
+</div>
+
+<div id="events-content"></div>
+
+</div>
+
+</div>
 
 </div>
 
 <script>
 
-const API_URL = 'https://api.anthropic.com/v1/messages';
-const MODEL = 'claude-sonnet-4-20250514';
+/*
+========================================================
+GOOGLE CUSTOM SEARCH CONFIG
+========================================================
 
-let lastApiCall = 0;
+1. Create Google Programmable Search Engine
+2. Enable Custom Search JSON API
+3. Add your API key + CX below
 
-const categories = [
-{
-  key:'nhs',
-  label:'NHS Organisations',
-  prompt:(loc)=>`
-Find real NHS discharge teams, hospitals, community trusts and ICB organisations in ${loc}, UK relevant to home care referrals.
+========================================================
+*/
 
-Return JSON array only:
+const GOOGLE_API_KEY = 'PASTE_GOOGLE_API_KEY';
+const GOOGLE_CX = 'PASTE_SEARCH_ENGINE_ID';
 
-[
-{
-"name":"",
-"type":"",
-"why_priority":"",
-"contacts":[
-{
-"name":"",
-"role":"",
-"email":""
+const RAH_LOCATIONS = [
+"Ards & North Down",
+"Ashby, Burton & Uttoxeter",
+"Aylesbury Vale and Chiltern",
+"Basingstoke",
+"Bedford",
+"Bishop's Stortford & Braintree",
+"Borehamwood & Watford",
+"Bournemouth",
+"Brentwood",
+"Bridgend and Vale of Glamorgan",
+"Bristol",
+"Bristol West",
+"Bromley",
+"Bromsgrove",
+"Calderdale",
+"Camberley",
+"Camden, Hampstead & Golders Green",
+"Cardiff",
+"Central London",
+"Central Wiltshire",
+"Cheshire East",
+"Chichester & Bognor Regis",
+"Colchester",
+"Croydon",
+"Barnet & Edgware",
+"Dartford & Bexley",
+"Derby",
+"Dundee, Angus & North Fife",
+"Ealing & Hounslow",
+"East Lancs",
+"Eastbourne & Bexhill",
+"Enfield",
+"Esher, Leatherhead & Dorking",
+"Exeter & Exmouth",
+"Grantham, Newark & Melton Mowbray",
+"Guildford & Farnham",
+"Harrogate",
+"Harrow",
+"Havant",
+"Hemel Hempstead",
+"High Wycombe",
+"Hillingdon & Uxbridge",
+"Horsham",
+"Ilkley, Keighley & Skipton",
+"Ipswich, Woodbridge & Felixstowe",
+"Isle of Wight",
+"Leeds East & Headingly",
+"Loughborough",
+"Loughton",
+"Lymm & Warrington South",
+"Maidenhead",
+"Medway",
+"Mid Cheshire",
+"Mid Hampshire",
+"Mid Sussex",
+"Mitcham, Streatham & Dulwich",
+"Newport",
+"North Cheshire and Leigh",
+"North Leeds & Otley",
+"North Somerset",
+"Nottingham",
+"Nottingham North",
+"Oxford",
+"Poole",
+"Portsmouth",
+"Preston",
+"Reading & Wokingham",
+"Reigate & Crawley",
+"Salisbury & Andover",
+"Sefton",
+"Solent",
+"Solihull",
+"South Cheshire",
+"South Liverpool",
+"South Trafford",
+"Southampton",
+"Stevenage, Letchworth & Hitchin",
+"Stockport",
+"Sutton & Mid-Surrey",
+"Swindon",
+"Telford",
+"Twickenham",
+"Tyneside",
+"Wandsworth & Lambeth",
+"Welwyn, Hatfield and St Albans",
+"Maidstone",
+"Wimbledon, Putney and Kingston",
+"Worthing & Shoreham District",
+"Gravesend"
+].sort();
+
+let state = {
+email:'',
+locations:[],
+activeLocation:''
+};
+
+function $(id){
+return document.getElementById(id);
 }
-]
+
+(function(){
+
+const sel = $('loc-select');
+
+RAH_LOCATIONS.forEach(loc => {
+
+const opt = document.createElement('option');
+
+opt.value = loc;
+opt.textContent = loc;
+
+sel.appendChild(opt);
+
+});
+
+})();
+
+function addLocation(){
+
+const val = $('loc-select').value;
+
+if(!val) return;
+
+if(state.locations.includes(val)) return;
+
+state.locations.push(val);
+
+renderLocationChips();
+
 }
-]
-`
+
+function removeLocation(loc){
+
+state.locations =
+state.locations.filter(x => x !== loc);
+
+renderLocationChips();
+
+}
+
+function renderLocationChips(){
+
+$('loc-chips').innerHTML =
+state.locations.map(loc => `
+<div class="loc-chip">
+${loc}
+<button onclick="removeLocation('${loc.replace(/'/g,"\\'")}')">
+×
+</button>
+</div>
+`).join('');
+
+}
+
+function renderLocationTabs(){
+
+$('loc-tabs').innerHTML =
+state.locations.map(loc => `
+<button class="loc-tab ${loc===state.activeLocation?'active':''}"
+onclick="switchLocation('${loc.replace(/'/g,"\\'")}')">
+${loc}
+</button>
+`).join('');
+
+}
+
+function switchLocation(loc){
+
+state.activeLocation = loc;
+
+renderLocationTabs();
+
+loadIntelligence(loc);
+
+loadEvents(loc);
+
+}
+
+function switchView(view){
+
+['intel','events'].forEach(v => {
+
+$('view-'+v).classList.toggle(
+'active',
+v===view
+);
+
+$('nav-'+v).classList.toggle(
+'active',
+v===view
+);
+
+});
+
+}
+
+async function initTool(){
+
+const email =
+$('setup-email').value.trim();
+
+if(!email.includes('@')){
+
+alert('Please enter a valid email');
+
+return;
+
+}
+
+if(!state.locations.length){
+
+alert('Please add a location');
+
+return;
+
+}
+
+state.email = email;
+
+state.activeLocation =
+state.locations[0];
+
+$('setup-screen').style.display='none';
+
+$('main-tool').style.display='block';
+
+$('user-email-display').textContent =
+email;
+
+renderLocationTabs();
+
+await loadIntelligence(
+state.activeLocation
+);
+
+await loadEvents(
+state.activeLocation
+);
+
+}
+
+async function googleSearch(query){
+
+const url =
+`https://www.googleapis.com/customsearch/v1?key=${GOOGLE_API_KEY}&cx=${GOOGLE_CX}&q=${encodeURIComponent(query)}`;
+
+const res = await fetch(url);
+
+if(!res.ok){
+
+throw new Error(
+'Google search failed'
+);
+
+}
+
+return res.json();
+
+}
+
+function renderResults(title,items){
+
+let html = `
+<div class="org-card">
+
+<h3 style="margin-bottom:14px">
+${title}
+</h3>
+`;
+
+if(!items.length){
+
+html += `
+<div style="font-size:13px;color:#888780">
+No results found.
+</div>
+`;
+
+}else{
+
+items.forEach(item => {
+
+html += `
+<div style="margin-bottom:18px">
+
+<div class="badge">
+Referral opportunity
+</div>
+
+<div class="org-name">
+${item.title}
+</div>
+
+<div class="org-meta">
+${item.displayLink || ''}
+</div>
+
+<div class="approach-box">
+${item.snippet || ''}
+</div>
+
+<a href="${item.link}"
+target="_blank"
+style="font-size:12px;color:#1D9ync function loadIntelligence(loc){
+
+$('intel-title').textContent =
+'Your referral landscape — ' + loc;
+
+$('intel-content').innerHTML = `
+<div class="loading-card">
+<span class="pulse"></span>
+Searching organisations in ${loc}...
+</div>
+`;
+
+const searches = [
+
+{
+title:'NHS organisations',
+query:`NHS discharge team ${loc}`
 },
 
 {
-  key:'gp',
-  label:'GP Practices & PCNs',
-  prompt:(loc)=>`
-Find real GP practices and PCNs in ${loc}, UK relevant to home care referrals.
-
-Return JSON array only.
-
-[
-{
-"name":"",
-"pcn":"",
-"why_priority":"",
-"contacts":[
-{
-"name":"",
-"role":"",
-"email":""
-}
-]
-}
-]
-`
+title:'GP practices & PCNs',
+query:`GP practice PCN ${loc}`
 },
 
 {
-  key:'solicitors',
-  label:'Solicitors',
-  prompt:(loc)=>`
-Find elderly care, probate or Court of Protection solicitors in ${loc}, UK.
-
-Return JSON array only.
-
-[
-{
-"name":"",
-"specialism":"",
-"why_priority":"",
-"contacts":[
-{
-"name":"",
-"role":"",
-"email":""
-}
-]
-}
-]
-`
+title:'Solicitors',
+query:`elderly care solicitor ${loc}`
 },
 
 {
-  key:'dementia',
-  label:'Dementia & Carer Groups',
-  prompt:(loc)=>`
-Find dementia cafes, Age UK branches and carers groups in ${loc}, UK.
+title:'Dementia & carers groups',
+query:`dementia cafe Age UK carers group ${loc}`
+},
 
-Return JSON array only.
+{
+title:'Private hospitals',
+query:`private hospital physiotherapy ${loc}`
+}
 
-[
-{
-"name":"",
-"type":"",
-"why_priority":"",
-"contacts":[
-{
-"name":"",
-"role":"",
-"email":""
-}
-]
-}
-]
-`
-}
 ];
 
-function sleep(ms){
-  return new Promise(r=>setTimeout(r,ms));
+let html = '';
+
+for(const s of searches){
+
+try{
+
+const data =
+await googleSearch(s.query);
+
+html += renderResults(
+s.title,
+data.items || []
+);
+
+}catch(err){
+
+html += `
+<div class="error-box">
+${s.title} failed to load.
+</div>
+`;
+
 }
 
-async function callClaude(prompt, apiKey, attempt=1){
-
-  const now = Date.now();
-  const diff = now - lastApiCall;
-
-  if(diff < 7000){
-    await sleep(7000 - diff);
-  }
-
-  lastApiCall = Date.now();
-
-  const body = {
-    model: MODEL,
-    max_tokens: 1200,
-    messages:[
-      {
-        role:'user',
-        content:prompt
-      }
-    ]
-  };
-
-  try{
-
-    const response = await fetch(API_URL,{
-      method:'POST',
-      headers:{
-        'Content-Type':'application/json',
-        'x-api-key':apiKey,
-        'anthropic-version':'2023-06-01'
-      },
-      body:JSON.stringify(body)
-    });
-
-    if(response.status === 429){
-
-      if(attempt > 5){
-        throw new Error('Rate limit exceeded too many times');
-      }
-
-      const waitTimes = [15000,30000,60000,90000,120000];
-      const wait = waitTimes[attempt-1];
-
-      document.getElementById('status').innerHTML =
-      `
-      <div class="loading">
-      Rate limited by Anthropic.<br><br>
-      Waiting ${wait/1000} seconds before retry...
-      </div>
-      `;
-
-      await sleep(wait);
-
-      return callClaude(prompt, apiKey, attempt+1);
-    }
-
-    if(!response.ok){
-
-      const text = await response.text();
-
-      throw new Error(text);
-    }
-
-    const data = await response.json();
-
-    return data.content
-      .filter(x=>x.type==='text')
-      .map(x=>x.text)
-      .join('');
-
-  }catch(err){
-
-    console.error(err);
-
-    throw err;
-  }
 }
 
-function safeJSON(text){
+$('intel-content').innerHTML = html;
 
-  try{
-
-    text = text.trim();
-
-    const start = text.indexOf('[');
-
-    const end = text.lastIndexOf(']');
-
-    text = text.slice(start,end+1);
-
-    return JSON.parse(text);
-
-  }catch(e){
-
-    console.error(e);
-
-    return [];
-  }
 }
 
-function renderCategory(title, items){
+async function loadEvents(loc){
 
-  let html = `
-  <div class="card">
-  <h2>${title}</h2>
-  `;
+$('events-content').innerHTML = `
+<div class="loading-card">
+<span class="pulse"></span>
+Searching local events...
+</div>
+`;
 
-  if(!items.length){
+try{
 
-    html += `
-    <div class="small">
-    No results found.
-    </div>
-    </div>
-    `;
+const data = await googleSearch(
+`ICB provider forum NHS event home care ${loc}`
+);
 
-    return html;
-  }
+$('events-content').innerHTML =
+renderResults(
+'Local forums & events',
+data.items || []
+);
 
-  items.forEach(item=>{
+}catch(err){
 
-    html += `
-    <div class="result">
+$('events-content').innerHTML = `
+<div class="error-box">
+Could not load events.
+</div>
+`;
 
-      <div class="badge">
-      ${item.type || item.specialism || 'Referral Opportunity'}
-      </div>
-
-      <h3>${item.name}</h3>
-
-      <div class="small">
-      ${item.why_priority || ''}
-      </div>
-    `;
-
-    if(item.contacts && item.contacts.length){
-
-      item.contacts.forEach(c=>{
-
-        html += `
-        <div class="contact">
-
-          <strong>${c.name || 'Contact'}</strong><br>
-
-          <span class="small">
-          ${c.role || ''}
-          </span><br>
-
-          <span style="color:#1D9E75">
-          ${c.email || ''}
-          </span>
-
-        </div>
-        `;
-      });
-    }
-
-    html += `</div>`;
-  });
-
-  html += `</div>`;
-
-  return html;
 }
 
-async function runSearch(){
-
-  const apiKey = document.getElementById('apiKey').value.trim();
-  const location = document.getElementById('location').value;
-
-  if(!apiKey){
-
-    alert('Please enter your Anthropic API key');
-
-    return;
-  }
-
-  document.getElementById('results').innerHTML = '';
-
-  document.getElementById('status').innerHTML =
-  `
-  <div class="loading">
-  Starting local intelligence search for ${location}...
-  </div>
-  `;
-
-  for(const category of categories){
-
-    try{
-
-      document.getElementById('status').innerHTML =
-      `
-      <div class="loading">
-      Searching ${category.label} in ${location}...
-      </div>
-      `;
-
-      const raw = await callClaude(
-        category.prompt(location),
-        apiKey
-      );
-
-      const parsed = safeJSON(raw);
-
-      document.getElementById('results').innerHTML +=
-      renderCategory(category.label, parsed);
-
-      localStorage.setItem(
-        'rah-cache-' + category.key + '-' + location,
-        JSON.stringify(parsed)
-      );
-
-      await sleep(8000);
-
-    }catch(err){
-
-      document.getElementById('results').innerHTML +=
-      `
-      <div class="error">
-      Failed loading ${category.label}<br><br>
-      ${err.message}
-      </div>
-      `;
-
-      await sleep(15000);
-    }
-  }
-
-  document.getElementById('status').innerHTML =
-  `
-  <div class="loading">
-  ✅ Search complete for ${location}
-  </div>
-  `;
 }
 
 </script>
