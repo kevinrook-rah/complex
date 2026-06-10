@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Complex Care Readiness - Section 1</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.6.0/dist/tabler-icons.min.css">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: #1a1a18; min-height: 100vh; padding: 20px; }
+  .container { max-width: 600px; margin: 0 auto; }
+  .header { text-align: center; margin-bottom: 30px; color: white; }
+  .header h1 { font-size: 32px; font-weight: 700; margin-bottom: 8px; }
+  .header p { font-size: 14px; opacity: 0.9; }
+  .section-label { display: inline-block; background: rgba(255,255,255,0.2); color: white; font-size: 11px; font-weight: 600; padding: 4px 10px; border-radius: 20px; margin-bottom: 12px; letter-spacing: 0.05em; }
+  .card { background: white; border-radius: 12px; box-shadow: 0 8px 24px rgba(0,0,0,0.15); overflow: hidden; margin-bottom: 20px; }
+  .input-section { padding: 20px; border-bottom: 1px solid #f0f0f0; }
+  .input-wrap { display: flex; gap: 8px; }
+  input.new-todo { flex: 1; padding: 12px 14px; border: 1px solid #e0e0e0; border-radius: 8px; font-size: 14px; font-family: inherit; transition: border-color 0.2s; }
+  input.new-todo:focus { outline: none; border-color: #667eea; }
+  input.new-todo::placeholder { color: #999; }
+  .btn-add { padding: 12px 20px; background: #667eea; color: white; border: none; border-radius: 8px; font-size: 14px; font-weight: 500; cursor: pointer; font-family: inherit; display: flex; align-items: center; gap: 6px; transition: background 0.2s; }
+  .btn-add:hover { background: #5568d3; }
+  .btn-add:active { transform: scale(0.98); }
+  .todos-section { padding: 0; max-height: 600px; overflow-y: auto; }
+  .todo-item { display: flex; align-items: center; gap: 12px; padding: 14px 20px; border-bottom: 1px solid #f5f5f5; transition: background 0.2s; cursor: pointer; }
+  .todo-item:hover { background: #fafafa; }
+  .todo-item:last-child { border-bottom: none; }
+  .checkbox { width: 20px; height: 20px; min-width: 20px; border: 2px solid #e0e0e0; border-radius: 6px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s; background: white; }
+  .checkbox.checked { background: #667eea; border-color: #667eea; }
+  .checkbox svg { display: none; }
+  .checkbox.checked svg { display: block; }
+  .todo-text { flex: 1; font-size: 14px; color: #333; transition: all 0.2s; }
+  .todo-item.completed .todo-text { text-decoration: line-through; color: #999; }
+  .btn-delete { width: 32px; height: 32px; min-width: 32px; border: none; background: #fee; border-radius: 6px; color: #c33; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 16px; transition: background 0.2s; }
+  .btn-delete:hover { background: #fdd; }
+  .empty-state { text-align: center; padding: 40px 20px; color: #999; }
+  .empty-state i { font-size: 48px; margin-bottom: 12px; opacity: 0.3; }
+  .empty-state p { font-size: 14px; }
+  .stats { display: flex; gap: 12px; padding: 14px 20px; background: #f9f9f9; border-bottom: 1px solid #f0f0f0; font-size: 12px; color: #666; }
+  .stat { flex: 1; }
+  .stat-val { font-size: 18px; font-weight: 600; color: #333; }
+  .stat-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; color: #999; margin-top: 2px; }
+  .progress-bar-wrap { padding: 14px 20px; background: #f9f9f9; border-bottom: 1px solid #f0f0f0; }
+  .progress-label { font-size: 12px; font-weight: 500; color: #666; margin-bottom: 6px; }
+  .progress-bar { height: 6px; background: #e0e0e0; border-radius: 3px; overflow: hidden; }
+  .progress-fill { height: 100%; background: linear-gradient(90deg, #667eea 0%, #764ba2 100%); border-radius: 3px; transition: width 0.3s; }
+  .actions { display: flex; gap: 8px; padding: 12px 20px; background: #f9f9f9; border-top: 1px solid #f0f0f0; }
+  .btn-small { flex: 1; padding: 8px 12px; background: white; border: 1px solid #e0e0e0; border-radius: 6px; font-size: 12px; cursor: pointer; color: #666; transition: all 0.2s; font-family: inherit; }
+  .btn-small:hover { background: #f5f5f5; }
+  .btn-small.danger { color: #c33; }
+  .btn-small.danger:hover { background: #fee; }
+  
+  /* Pathway Recommendation Section */
+  .pathway-output { display: none; margin: 20px 0; padding: 20px; border: 2px solid #667eea; border-radius: 8px; background: linear-gradient(135deg, #f8f9ff 0%, #f0f4ff 100%); }
+  .pathway-output.active { display: block; }
+  .pathway-header { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
+  .pathway-header i { font-size: 24px; color: #667eea; }
+  .pathway-header h2 { font-size: 16px; font-weight: 600; color: #333; margin: 0; }
+  .pathway-badge { display: inline-block; background: #667eea; color: white; font-size: 11px; font-weight: 600; padding: 4px 10px; border-radius: 20px; margin-bottom: 12px; letter-spacing: 0.05em; }
+  .pathway-title { font-size: 16px; font-weight: 600; color: #333; margin-bottom: 8px; }
+  .pathway-description { font-size: 13px; color: #666; line-height: 1.6; margin-bottom: 12px; }
+  .pathway-cta { display: inline-flex; align-items: center; gap: 6px; color: #667eea; font-weight: 500; font-size: 13px; text-decoration: none; transition: gap 0.2s; }
+  .pathway-cta:hover { gap: 10px; }
+  .pathway-progress { font-size: 12px; color: #999; margin-top: 12px; padding-top: 12px; border-top: 1px solid rgba(102, 126, 234, 0.1); }
+  
+  @media(max-width: 480px) {
+    .header h1 { font-size: 24px; }
+    .container { margin-top: 20px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <div class="header">
+    <div class="section-label">SECTION 1 — READINESS ASSESSMENT</div>
+    <h1>Complex Care Readiness</h1>
+    <p>Track your progress toward complex care service launch</p>
+  </div>
+
+  <!-- Pathway Recommendation Output -->
+  <div class="pathway-output" id="pathwayOutput">
+    <div class="pathway-header">
+      <i class="ti ti-route"></i>
+      <h2>Recommended Pathway</h2>
+    </div>
+    <div class="pathway-badge" id="pathwayBadge">Pathway A</div>
+    <div class="pathway-title" id="pathwayTitle"></div>
+    <div class="pathway-description" id="pathwayDescription"></div>
+    <a href="#" class="pathway-cta" id="pathwayLink">
+      <span>Go to recommended section</span>
+      <i class="ti ti-arrow-right"></i>
+    </a>
+    <div class="pathway-progress" id="pathwayProgress"></div>
+  </div>
+
+  <!-- Main Task Card -->
+  <div class="card">
+    <div class="input-section">
+      <div class="input-wrap">
+        <input type="text" class="new-todo" id="todoInput" placeholder="Add a new task...">
+        <button class="btn-add" onclick="addTodo()">
+          <i class="ti ti-plus"></i> Add
+        </button>
+      </div>
+    </div>
+
+    <div class="progress-bar-wrap" id="progressWrap" style="display:none;">
+      <div class="progress-label">Readiness Progress</div>
+      <div class="progress-bar">
+        <div class="progress-fill" id="progressFill" style="width:0%"></div>
+      </div>
+    </div>
+
+    <div class="stats" id="stats" style="display:none;">
+      <div class="stat">
+        <div class="stat-val" id="totalCount">0</div>
+        <div class="stat-label">Total Tasks</div>
+      </div>
+      <div class="stat">
+        <div class="stat-val" id="completedCount">0</div>
+        <div class="stat-label">Completed</div>
+      </div>
+      <div class="stat">
+        <div class="stat-val" id="remainingCount">0</div>
+        <div class="stat-label">Remaining</div>
+      </div>
+    </div>
+
+    <div class="todos-section" id="todosList">
+      <div class="empty-state">
+        <div style="font-size: 40px; margin-bottom: 12px;">📋</div>
+        <p>No tasks yet. Add your first readiness task to get started.</p>
+      </div>
+    </div>
+
+    <div class="actions" id="actions" style="display:none;">
+      <button class="btn-small" onclick="clearCompleted()">Clear completed</button>
+      <button class="btn-small danger" onclick="clearAll()">Clear all</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const STORAGE_KEY = 'complexCareReadinessTasks';
+
+let todos = [];
+
+// Pathway definitions
+const pathways = {
+  A: {
+    label: 'Pathway A',
+    title: 'Build Your Complex Care Foundations',
+    description: 'You\'re at the start of your complex care journey. Focus on establishing core governance, clinical frameworks, and operational readiness. This foundation is essential before scaling services.',
+    linkText: 'Start with Governance Foundations',
+    anchor: '#governance'
+  },
+  B: {
+    label: 'Pathway B',
+    title: 'Grow Your Existing Complex Care Service',
+    description: 'You have foundational elements in place. Now expand your reach by building NHS relationships, understanding CHC pathways, and developing referral channels.',
+    linkText: 'Explore NHS Relationships',
+    anchor: '#nhs-relationships'
+  },
+  C: {
+    label: 'Pathway C',
+    title: 'Explore Nurse-Led Care & TDDI',
+    description: 'You\'re well-prepared operationally. Consider whether nurse-led care or TDDI registration aligns with your vision and market opportunity.',
+    linkText: 'Learn about TDDI',
+    anchor: '#tddi'
+  },
+  D: {
+    label: 'Pathway D',
+    title: 'Prepare for NHS Tendering & Frameworks',
+    description: 'You\'re ready for scale. Focus on tender preparation, framework agreements, and commissioning conversations to secure volume.',
+    linkText: 'Prepare for Tendering',
+    anchor: '#commissioning'
+  }
+};
+
+// Determine pathway based on completion percentage
+function getPathway(completionPercent) {
+  if (completionPercent <= 25) return 'A';
+  if (completionPercent <= 50) return 'B';
+  if (completionPercent <= 75) return 'C';
+  return 'D';
+}
+
+// Load todos from localStorage on page load
+function loadTodos() {
+  const stored = localStorage.getItem(STORAGE_KEY);
+  todos = stored ? JSON.parse(stored) : [];
+  renderTodos();
+  updatePathway();
+}
+
+// Save todos to localStorage
+function saveTodos() {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(todos));
+}
+
+// Add a new todo
+function addTodo() {
+  const input = document.getElementById('todoInput');
+  const text = input.value.trim();
+  
+  if (text === '') {
+    input.focus();
+    return;
+  }
+  
+  const todo = {
+    id: Date.now(),
+    text: text,
+    completed: false,
+    createdAt: new Date().toISOString()
+  };
+  
+  todos.unshift(todo);
+  saveTodos();
+  renderTodos();
+  updatePathway();
+  input.value = '';
+  input.focus();
+}
+
+// Toggle todo completion
+function toggleTodo(id) {
+  const todo = todos.find(t => t.id === id);
+  if (todo) {
+    todo.completed = !todo.completed;
+    saveTodos();
+    renderTodos();
+    updatePathway();
+  }
+}
+
+// Delete a todo
+function deleteTodo(id) {
+  todos = todos.filter(t => t.id !== id);
+  saveTodos();
+  renderTodos();
+  updatePathway();
+}
+
+// Clear completed todos
+function clearCompleted() {
+  if (todos.some(t => t.completed)) {
+    if (confirm('Delete all completed tasks?')) {
+      todos = todos.filter(t => !t.completed);
+      saveTodos();
+      renderTodos();
+      updatePathway();
+    }
+  }
+}
+
+// Clear all todos
+function clearAll() {
+  if (todos.length > 0) {
+    if (confirm('Delete all tasks? This cannot be undone.')) {
+      todos = [];
+      saveTodos();
+      renderTodos();
+      updatePathway();
+    }
+  }
+}
+
+// Calculate completion percentage
+function getCompletionPercent() {
+  if (todos.length === 0) return 0;
+  const completedCount = todos.filter(t => t.completed).length;
+  return Math.round((completedCount / todos.length) * 100);
+}
+
+// Update pathway recommendation
+function updatePathway() {
+  if (todos.length === 0) {
+    document.getElementById('pathwayOutput').classList.remove('active');
+    return;
+  }
+  
+  const completionPercent = getCompletionPercent();
+  const pathwayKey = getPathway(completionPercent);
+  const pathway = pathways[pathwayKey];
+  
+  // Update pathway display
+  document.getElementById('pathwayBadge').textContent = pathway.label;
+  document.getElementById('pathwayTitle').textContent = pathway.title;
+  document.getElementById('pathwayDescription').textContent = pathway.description;
+  document.getElementById('pathwayLink').href = pathway.anchor;
+  document.getElementById('pathwayLink').innerHTML = `<span>${pathway.linkText}</span><i class="ti ti-arrow-right"></i>`;
+  
+  const completedCount = todos.filter(t => t.completed).length;
+  document.getElementById('pathwayProgress').innerHTML = `
+    <strong>${completionPercent}%</strong> complete — ${completedCount} of ${todos.length} tasks done.
+    ${pathwayKey === 'D' ? '✅ Ready for next phase.' : `Move to Pathway ${String.fromCharCode(65 + (pathwayKey.charCodeAt(0) - 65 + 1))} when you reach ${(Math.floor(completionPercent / 25) + 1) * 25}% completion.`}
+  `;
+  
+  document.getElementById('pathwayOutput').classList.add('active');
+}
+
+// Render todos list
+function renderTodos() {
+  const container = document.getElementById('todosList');
+  const statsDiv = document.getElementById('stats');
+  const actionsDiv = document.getElementById('actions');
+  const progressDiv = document.getElementById('progressWrap');
+  
+  if (todos.length === 0) {
+    container.innerHTML = `
+      <div class="empty-state">
+        <div style="font-size: 40px; margin-bottom: 12px;">📋</div>
+        <p>No tasks yet. Add your first readiness task to get started.</p>
+      </div>
+    `;
+    statsDiv.style.display = 'none';
+    actionsDiv.style.display = 'none';
+    progressDiv.style.display = 'none';
+    return;
+  }
+  
+  const completedCount = todos.filter(t => t.completed).length;
+  const remainingCount = todos.length - completedCount;
+  const completionPercent = getCompletionPercent();
+  
+  // Update stats
+  document.getElementById('totalCount').textContent = todos.length;
+  document.getElementById('completedCount').textContent = completedCount;
+  document.getElementById('remainingCount').textContent = remainingCount;
+  statsDiv.style.display = 'flex';
+  actionsDiv.style.display = 'flex';
+  
+  // Update progress bar
+  document.getElementById('progressFill').style.width = completionPercent + '%';
+  progressDiv.style.display = 'block';
+  
+  // Render todos
+  container.innerHTML = todos.map(todo => `
+    <div class="todo-item ${todo.completed ? 'completed' : ''}">
+      <div class="checkbox ${todo.completed ? 'checked' : ''}" onclick="event.stopPropagation(); toggleTodo(${todo.id})">
+        <svg width="12" height="10" viewBox="0 0 12 10" fill="none">
+          <path d="M1 5L4 8L11 1" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <div class="todo-text">${escapeHtml(todo.text)}</div>
+      <button class="btn-delete" onclick="deleteTodo(${todo.id})" title="Delete task">
+        <i class="ti ti-trash"></i>
+      </button>
+    </div>
+  `).join('');
+}
+
+// Escape HTML to prevent XSS
+function escapeHtml(text) {
+  const div = document.createElement('div');
+  div.textContent = text;
+  return div.innerHTML;
+}
+
+// Allow Enter key to add todo
+document.getElementById('todoInput').addEventListener('keypress', function(e) {
+  if (e.key === 'Enter') {
+    addTodo();
+  }
+});
+
+// Initialize on page load
+loadTodos();
+</script>
+
+</body>
+</html>
