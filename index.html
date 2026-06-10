@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>NHS & Private Referral Engagement Tool — Right at Home</title>
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.6.0/dist/tabler-icons.min.css">
@@ -12,75 +13,260 @@
 body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f8f7f4;color:#1a1a18;min-height:100vh}
 .shell{max-width:880px;margin:0 auto;padding:28px 20px 80px}
 .top-bar{display:flex;align-items:center;justify-content:space-between;margin-bottom:22px;flex-wrap:wrap;gap:10px}
-.logo-badge{background:#1D9E75;color:white;font-size:11px;font-weight:600;padding:4px 10px;border-radius:6px;letter-spacing:0.04em;white-space:nowrap}
+.logo-badge{background:#1D9E75;color:white;font-size:11px;font-weight:600;padding:4px 10px;border-radius:6px;letter-spacing:0.04em}
 .top-title{font-size:17px;font-weight:500}
-.btn{font-family:inherit;font-size:13px;padding:8px 14px;border:0.5px solid #d4d2ca;border-radius:8px;background:transparent;color:#1a1a18;cursor:pointer;display:inline-flex;align-items:center;gap:5px;transition:background 0.12s;white-space:nowrap}
-.btn:hover{background:#f0ede6}
-.btn:disabled{opacity:0.45;cursor:not-allowed}
+.btn{font-family:inherit;font-size:13px;padding:8px 14px;border:0.5px solid #d4d2ca;border-radius:8px;background:transparent;color:#1a1a18;cursor:pointer;display:inline-flex;align-items:center;gap:5px}
 .btn.primary{background:#1D9E75;color:#fff;border-color:#1D9E75}
 .btn.primary:hover{background:#0F6E56}
-.btn.sm{font-size:12px;padding:5px 10px}
-.btn.danger{color:#A32D2D;border-color:#F09595}
 
-.setup-card{background:#fff;border:0.5px solid #d4d2ca;border-radius:14px;padding:32px 28px;max-width:560px;margin:40px auto 0}
-.setup-logo{display:flex;align-items:center;gap:10px;margin-bottom:24px}
+.setup-card{
+background:#fff;
+border:0.5px solid #d4d2ca;
+border-radius:14px;
+padding:32px 28px;
+max-width:560px;
+margin:40px auto 0
+}
+
 .setup-field{margin-bottom:14px}
-.setup-field label{display:block;font-size:12px;font-weight:500;color:#888780;margin-bottom:5px;letter-spacing:0.04em;text-transform:uppercase}
-.setup-field input,.setup-field select{font-family:inherit;font-size:14px;padding:10px 12px;border:0.5px solid #d4d2ca;border-radius:8px;background:#f8f7f4;color:#1a1a18;width:100%}
-.setup-field input:focus,.setup-field select:focus{outline:none;border-color:#1D9E75;background:#fff}
-.loc-chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;min-height:34px}
-.loc-chip{display:flex;align-items:center;gap:5px;background:#E1F5EE;color:#085041;font-size:12px;font-weight:500;padding:4px 10px;border-radius:20px}
-.loc-chip button{background:none;border:none;cursor:pointer;color:#085041;font-size:14px;line-height:1;padding:0;margin-left:2px}
-.loc-add-row{display:flex;gap:8px;align-items:center;margin-top:6px}
-.loc-add-row select{flex:1}
-.setup-error{background:#FCEBEB;border:0.5px solid #F09595;border-radius:8px;padding:10px 12px;font-size:13px;color:#501313;margin-bottom:12px;display:none}
 
-.user-bar{background:#fff;border:0.5px solid #d4d2ca;border-radius:10px;padding:10px 16px;margin-bottom:20px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
-.user-email{font-size:13px;color:#888780}
-.loc-tabs{display:flex;gap:6px;flex-wrap:wrap;flex:1}
-.loc-tab{cursor:pointer;padding:5px 12px;border:0.5px solid #d4d2ca;border-radius:20px;font-size:12px;font-weight:500;background:#f8f7f4;color:#5f5e5a;transition:all 0.12s;font-family:inherit}
-.loc-tab.active{background:#1D9E75;color:#fff;border-color:#1D9E75}
+.setup-field label{
+display:block;
+font-size:12px;
+font-weight:500;
+color:#888780;
+margin-bottom:5px;
+letter-spacing:0.04em;
+text-transform:uppercase
+}
 
-.nav-row{display:flex;gap:7px;margin-bottom:22px;flex-wrap:wrap}
-.nav-tab{cursor:pointer;padding:8px 14px;border:0.5px solid #d4d2ca;border-radius:8px;font-size:13px;font-weight:500;background:#eeecea;color:#5f5e5a;transition:all 0.15s;white-space:nowrap;display:flex;align-items:center;gap:6px;font-family:inherit}
-.nav-tab.active{background:#fff;color:#1a1a18;border-color:#888780}
+.setup-field input,
+.setup-field select{
+font-family:inherit;
+font-size:14px;
+padding:10px 12px;
+border:0.5px solid #d4d2ca;
+border-radius:8px;
+background:#f8f7f4;
+color:#1a1a18;
+width:100%
+}
+
+.loc-chips{
+display:flex;
+flex-wrap:wrap;
+gap:6px;
+margin-top:8px;
+min-height:34px
+}
+
+.loc-chip{
+display:flex;
+align-items:center;
+gap:5px;
+background:#E1F5EE;
+color:#085041;
+font-size:12px;
+font-weight:500;
+padding:4px 10px;
+border-radius:20px
+}
+
+.loc-chip button{
+background:none;
+border:none;
+cursor:pointer;
+color:#085041;
+font-size:14px
+}
+
+.loc-add-row{
+display:flex;
+gap:8px;
+align-items:center;
+margin-top:6px
+}
+
+.loc-add-row select{
+flex:1
+}
+
+.user-bar{
+background:#fff;
+border:0.5px solid #d4d2ca;
+border-radius:10px;
+padding:10px 16px;
+margin-bottom:20px;
+display:flex;
+align-items:center;
+gap:12px;
+flex-wrap:wrap
+}
+
+.loc-tabs{
+display:flex;
+gap:6px;
+flex-wrap:wrap;
+flex:1
+}
+
+.loc-tab{
+cursor:pointer;
+padding:5px 12px;
+border:0.5px solid #d4d2ca;
+border-radius:20px;
+font-size:12px;
+font-weight:500;
+background:#f8f7f4;
+color:#5f5e5a
+}
+
+.loc-tab.active{
+background:#1D9E75;
+color:#fff;
+border-color:#1D9E75
+}
+
+.nav-row{
+display:flex;
+gap:7px;
+margin-bottom:22px;
+flex-wrap:wrap
+}
+
+.nav-tab{
+cursor:pointer;
+padding:8px 14px;
+border:0.5px solid #d4d2ca;
+border-radius:8px;
+font-size:13px;
+font-weight:500;
+background:#eeecea;
+color:#5f5e5a;
+display:flex;
+align-items:center;
+gap:6px
+}
+
+.nav-tab.active{
+background:#fff;
+color:#1a1a18;
+border-color:#888780
+}
 
 .view{display:none}
 .view.active{display:block}
 
-.section-eyebrow{font-size:11px;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;color:#888780;margin-bottom:4px}
-.section-title{font-size:19px;font-weight:500;margin-bottom:6px}
-.section-sub{font-size:13px;color:#5f5e5a;margin-bottom:20px;line-height:1.6}
+.section-eyebrow{
+font-size:11px;
+font-weight:500;
+letter-spacing:0.06em;
+text-transform:uppercase;
+color:#888780;
+margin-bottom:4px
+}
 
-.org-card{background:#fff;border:0.5px solid #d4d2ca;border-radius:10px;padding:14px 16px;margin-bottom:8px}
-.org-card-header{display:flex;align-items:flex-start;gap:10px;cursor:pointer}
-.org-name{font-size:14px;font-weight:500;margin-bottom:2px}
-.org-meta{font-size:12px;color:#888780}
-.org-body{display:none;margin-top:12px;padding-top:12px;border-top:0.5px solid #f0ede6}
-.org-body.open{display:block}
-.org-contact{display:flex;gap:8px;align-items:flex-start;padding:7px 0;border-bottom:0.5px solid #f8f7f4}
-.org-contact:last-child{border-bottom:none}
-.contact-name{font-size:13px;font-weight:500;margin-bottom:1px}
-.contact-role{font-size:12px;color:#888780}
-.contact-detail{font-size:12px;color:#1D9E75}
-.approach-box{background:#f8f7f4;border-radius:8px;padding:12px 14px;font-size:13px;color:#5f5e5a;line-height:1.6}
-.approach-label{font-size:10px;font-weight:600;letter-spacing:0.07em;text-transform:uppercase;color:#b4b2a9;margin-bottom:4px}
-.tier-pill{font-size:11px;font-weight:600;padding:3px 10px;border-radius:12px;letter-spacing:0.03em}
-.tier-1{background:#E1F5EE;color:#085041}
-.tier-2{background:#E6F1FB;color:#0C447C}
-.tier-3{background:#FAEEDA;color:#633806}
+.section-title{
+font-size:19px;
+font-weight:500;
+margin-bottom:6px
+}
 
-.loading-card{background:#fff;border:0.5px solid #d4d2ca;border-radius:10px;padding:28px;text-align:center;color:#888780;font-size:13px}
-.pulse{display:inline-block;width:8px;height:8px;border-radius:50%;background:#1D9E75;margin-right:8px;animation:pulse 1.2s ease-in-out infinite}
-@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.4;transform:scale(0.75)}}
+.section-sub{
+font-size:13px;
+color:#5f5e5a;
+margin-bottom:20px;
+line-height:1.6
+}
 
-.error-box{background:#FCEBEB;border:0.5px solid #F09595;border-radius:8px;padding:12px 14px;font-size:13px;color:#501313;margin-bottom:14px}
+.org-card{
+background:#fff;
+border:0.5px solid #d4d2ca;
+border-radius:10px;
+padding:14px 16px;
+margin-bottom:8px
+}
 
-.event-card{background:#fff;border:0.5px solid #d4d2ca;border-radius:10px;padding:14px 16px;margin-bottom:8px}
-.action-bar{margin-top:20px;padding-top:16px;border-top:0.5px solid #e5e3dc;display:flex;gap:8px;flex-wrap:wrap}
-.badge{display:inline-block;font-size:11px;font-weight:500;padding:3px 8px;border-radius:6px}
-.badge-nhs{background:#E6F1FB;color:#0C447C}
-.badge-private{background:#E1F5EE;color:#085041}
+.org-card-header{
+display:flex;
+align-items:flex-start;
+gap:10px;
+cursor:pointer
+}
+
+.org-name{
+font-size:14px;
+font-weight:500;
+margin-bottom:2px
+}
+
+.org-meta{
+font-size:12px;
+color:#888780
+}
+
+.org-body{
+display:none;
+margin-top:12px;
+padding-top:12px;
+border-top:0.5px solid #f0ede6
+}
+
+.org-body.open{
+display:block
+}
+
+.approach-box{
+background:#f8f7f4;
+border-radius:8px;
+padding:12px 14px;
+font-size:13px;
+color:#5f5e5a;
+line-height:1.6
+}
+
+.loading-card{
+background:#fff;
+border:0.5px solid #d4d2ca;
+border-radius:10px;
+padding:28px;
+text-align:center;
+color:#888780;
+font-size:13px
+}
+
+.pulse{
+display:inline-block;
+width:8px;
+height:8px;
+border-radius:50%;
+background:#1D9E75;
+margin-right:8px;
+animation:pulse 1.2s ease-in-out infinite
+}
+
+@keyframes pulse{
+0%,100%{opacity:1}
+50%{opacity:0.4}
+}
+
+.event-card{
+background:#fff;
+border:0.5px solid #d4d2ca;
+border-radius:10px;
+padding:14px 16px;
+margin-bottom:8px
+}
+
+.error-box{
+background:#FCEBEB;
+border:0.5px solid #F09595;
+border-radius:8px;
+padding:12px 14px;
+font-size:13px;
+color:#501313;
+margin-bottom:14px
+}
 </style>
 </head>
 
@@ -99,19 +285,13 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 
 <div class="setup-card">
 
-<div class="setup-logo">
-<span class="logo-badge">Right at Home</span>
-<span style="font-size:15px;font-weight:500">Set up your engagement tool</span>
-</div>
-
-<div class="setup-error" id="setup-error"></div>
-
 <div class="setup-field">
 <label>Your email address</label>
 <input id="setup-email" type="email" placeholder="you@rightathome.co.uk">
 </div>
 
 <div class="setup-field">
+
 <label>Your franchise location(s)</label>
 
 <div class="loc-chips" id="loc-chips"></div>
@@ -122,7 +302,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 <option value="">— Select a location to add —</option>
 </select>
 
-<button class="btn sm" onclick="addLocation()">
+<button class="btn" onclick="addLocation()">
 <i class="ti ti-plus"></i> Add
 </button>
 
@@ -130,8 +310,13 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 
 </div>
 
-<button class="btn primary" onclick="initTool()" style="width:100%;justify-content:center;padding:11px;margin-top:6px">
-<i class="ti ti-map-search"></i> Build my engagement map
+<button class="btn primary"
+onclick="initTool()"
+style="width:100%;justify-content:center;padding:11px;margin-top:6px">
+
+<i class="ti ti-map-search"></i>
+Build my engagement map
+
 </button>
 
 </div>
@@ -142,10 +327,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 
 <div class="user-bar">
 
-<div style="display:flex;align-items:center;gap:6px">
-<i class="ti ti-mail" style="font-size:14px;color:#b4b2a9"></i>
-<span class="user-email" id="user-email-display"></span>
-</div>
+<div style="font-size:13px;color:#888780"
+id="user-email-display"></div>
 
 <div class="loc-tabs" id="loc-tabs"></div>
 
@@ -153,19 +336,31 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 
 <div class="nav-row">
 
-<button class="nav-tab active" onclick="switchView('intel')" id="nav-intel">
-<i class="ti ti-radar"></i> Local intelligence
+<button class="nav-tab active"
+onclick="switchView('intel')"
+id="nav-intel">
+
+<i class="ti ti-radar"></i>
+Local intelligence
+
 </button>
 
-<button class="nav-tab" onclick="switchView('events')" id="nav-events">
-<i class="ti ti-calendar-event"></i> Local events
+<button class="nav-tab"
+onclick="switchView('events')"
+id="nav-events">
+
+<i class="ti ti-calendar-event"></i>
+Local events
+
 </button>
 
 </div>
 
 <div class="view active" id="view-intel">
 
-<div class="section-eyebrow">Local market intelligence</div>
+<div class="section-eyebrow">
+Local market intelligence
+</div>
 
 <div class="section-title" id="intel-title">
 Your referral landscape
@@ -176,38 +371,31 @@ Key organisations and contacts in your area, researched live and organised by re
 </div>
 
 <div id="intel-content">
+
 <div class="loading-card">
 <span class="pulse"></span>
 Searching for local contacts…
 </div>
-</div>
 
-<div class="action-bar">
-<button class="btn" onclick="refreshIntelligence()">
-<i class="ti ti-refresh"></i> Refresh search
-</button>
 </div>
 
 </div>
 
 <div class="view" id="view-events">
 
-<div class="section-eyebrow">Get in the room</div>
+<div class="section-eyebrow">
+Get in the room
+</div>
 
 <div class="section-title">
 Local forums and engagement events
 </div>
 
 <div class="section-sub">
-Provider engagement sessions, ICB forums, and networking events you should be attending in your area.
+Provider engagement sessions, ICB forums, and networking events.
 </div>
 
-<div id="events-content">
-<div class="loading-card">
-<span class="pulse"></span>
-Searching for local events…
-</div>
-</div>
+<div id="events-content"></div>
 
 </div>
 
@@ -220,6 +408,7 @@ Searching for local events…
 const ANTHROPIC_API_KEY = 'PASTE_YOUR_ANTHROPIC_KEY_HERE';
 
 const API_URL = 'https://api.anthropic.com/v1/messages';
+
 const MODEL = 'claude-sonnet-4-20250514';
 
 let lastApiCall = 0;
@@ -318,14 +507,210 @@ const RAH_LOCATIONS = [
 let state = {
 email:'',
 locations:[],
-activeLocation:'',
-intelCache:{},
-eventsCache:{}
+activeLocation:''
 };
 
 function $(id){
 return document.getElementById(id);
 }
 
+/* THIS IS THE SECTION YOU SAID IT STILL NEEDS */
+
 (function populateLocationSelect(){
+
+const sel = $('loc-select');
+
+RAH_LOCATIONS.forEach(l => {
+
+const o = document.createElement('option');
+
+o.value = l;
+o.textContent = l;
+
+sel.appendChild(o);
+
+});
+
+})();
+
+function addLocation(){
+
+const sel = $('loc-select');
+
+const val = sel.value;
+
+if(!val) return;
+
+if(state.locations.includes(val)) return;
+
+state.locations.push(val);
+
+sel.value='';
+
+renderLocChips();
+
+}
+
+function removeLocation(loc){
+
+state.locations =
+state.locations.filter(l => l !== loc);
+
+renderLocChips();
+
+}
+
+function renderLocChips(){
+
+$('loc-chips').innerHTML =
+state.locations.map(l => `
+<div class="loc-chip">
+${l}
+<button onclick="removeLocation('${l.replace(/'/g,"\\'")}')">×</button>
+</div>
+`).join('');
+
+}
+
+async function initTool(){
+
+const email =
+$('setup-email').value.trim();
+
+if(!email || !email.includes('@')){
+
+alert('Please enter a valid email');
+
+return;
+
+}
+
+if(!state.locations.length){
+
+alert('Please add at least one location');
+
+return;
+
+}
+
+state.email = email;
+
+state.activeLocation = state.locations[0];
+
+$('setup-screen').style.display='none';
+
+$('main-tool').style.display='block';
+
+$('user-email-display').textContent = email;
+
+renderLocTabs();
+
+await loadLocationData(state.activeLocation);
+
+}
+
+function renderLocTabs(){
+
+$('loc-tabs').innerHTML =
+state.locations.map(l => `
+<button class="loc-tab${l===state.activeLocation?' active':''}"
+onclick="switchLocation('${l.replace(/'/g,"\\'")}')">
+${l}
+</button>
+`).join('');
+
+}
+
+async function switchLocation(loc){
+
+state.activeLocation = loc;
+
+renderLocTabs();
+
+await loadLocationData(loc);
+
+}
+
+function switchView(v){
+
+['intel','events'].forEach(n => {
+
+$('view-'+n).classList.toggle(
+'active',
+n===v
+);
+
+$('nav-'+n).classList.toggle(
+'active',
+n===v
+);
+
+});
+
+}
+
+async function loadLocationData(loc){
+
+await loadIntelligence(loc);
+
+await new Promise(r => setTimeout(r,3000));
+
+await loadEvents(loc);
+
+}
+
+async function callClaude(
+system,
+user,
+maxTokens = 2000,
+useSearch = true,
+attempt = 1
+){
+
+const now = Date.now();
+
+const diff = now - lastApiCall;
+
+if(diff < 7000){
+
+await new Promise(r =>
+setTimeout(r,7000-diff)
+);
+
+}
+
+lastApiCall = Date.now();
+
+const body = {
+model: MODEL,
+max_tokens: maxTokens,
+system,
+messages:[
+{
+role:'user',
+content:user
+}
+]
+};
+
+if(useSearch){
+
+body.tools = [
+{
+type:'web_search_20250305',
+name:'web_search'
+}
+];
+
+}
+
+const r = await fetch(API_URL,{
+method:'POST',
+headers:{
+'Content-Type':'application/json',
+'x-api-key':ANTHROPIC_API_KEY,
+'anthropic-version':'2023-06-01'
+},
+body:JSON.stringify(body)
+});
 
