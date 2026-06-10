@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Complex Care Development Toolkit — Right at Home</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.6.0/dist/tabler-icons.min.css">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f8f7f4; color: #1a1a18; min-height: 100vh; }
+  .shell { max-width: 780px; margin: 0 auto; padding: 32px 20px 60px; }
+  .top-bar { display: flex; align-items: center; gap: 12px; margin-bottom: 28px; }
+  .logo-badge { background: #1D9E75; color: white; font-size: 11px; font-weight: 600; padding: 4px 10px; border-radius: 6px; letter-spacing: 0.04em; }
+  .top-title { font-size: 18px; font-weight: 500; color: #1a1a18; }
+  .nav-row { display: flex; gap: 8px; margin-bottom: 24px; flex-wrap: wrap; }
+  .nav-tab { cursor: pointer; padding: 9px 16px; border: 0.5px solid #d4d2ca; border-radius: 8px; font-size: 13px; font-weight: 500; background: #eeece5; color: #5f5e5a; transition: all 0.15s; white-space: nowrap; display: flex; align-items: center; gap: 5px; }
+  .nav-tab.active { background: #fff; color: #1a1a18; border-color: #888780; }
+  .view { display: none; }
+  .view.active { display: block; }
+  .section-eyebrow { font-size: 11px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; color: #888780; margin-bottom: 4px; }
+  .section-title { font-size: 20px; font-weight: 500; margin-bottom: 6px; }
+  .section-sub { font-size: 13px; color: #5f5e5a; margin-bottom: 20px; }
+  .phase-row { display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; }
+  .phase-tab { cursor: pointer; padding: 8px 14px; border: 0.5px solid #d4d2ca; border-radius: 8px; font-size: 13px; font-weight: 500; background: #eeece5; color: #5f5e5a; transition: all 0.15s; }
+  .phase-tab.active { background: #fff; color: #1a1a18; border-color: #888780; }
+  .progress-wrap { display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px; flex-wrap: wrap; gap: 10px; }
+  .progress-label { font-size: 13px; color: #5f5e5a; margin-bottom: 3px; }
+  .progress-val { font-size: 20px; font-weight: 500; }
+  .progress-bar { height: 6px; background: #e5e3dc; border-radius: 3px; overflow: hidden; }
+  .progress-fill { height: 100%; background: #1D9E75; border-radius: 3px; transition: width 0.3s; }
+  .action-row { display: flex; align-items: flex-start; gap: 12px; padding: 14px 0; border-bottom: 0.5px solid #e5e3dc; cursor: pointer; }
+  .action-row:last-child { border-bottom: none; }
+  .cb { width: 20px; height: 20px; min-width: 20px; border-radius: 4px; border: 1.5px solid #b4b2a9; cursor: pointer; display: flex; align-items: center; justify-content: center; margin-top: 2px; background: #fff; transition: all 0.15s; }
+  .cb.checked { background: #1D9E75; border-color: #1D9E75; }
+  .action-title { font-size: 14px; font-weight: 500; margin-bottom: 3px; }
+  .action-detail { font-size: 13px; color: #5f5e5a; line-height: 1.55; }
+  .done-text { text-decoration: line-through; color: #b4b2a9; }
+  .tool-btn { display: inline-flex; align-items: center; gap: 4px; margin-top: 7px; font-size: 11px; padding: 4px 10px; border: 0.5px solid #d4d2ca; border-radius: 6px; background: #f8f7f4; color: #5f5e5a; cursor: pointer; font-family: inherit; transition: background 0.1s; }
+  .tool-btn:hover { background: #eeece5; }
+  .action-btns { margin-top: 20px; padding-top: 16px; border-top: 0.5px solid #e5e3dc; display: flex; gap: 8px; flex-wrap: wrap; }
+  .btn { font-family: inherit; font-size: 12px; padding: 7px 13px; border: 0.5px solid #d4d2ca; border-radius: 8px; background: transparent; color: #1a1a18; cursor: pointer; display: inline-flex; align-items: center; gap: 5px; transition: background 0.12s; }
+  .btn:hover { background: #eeece5; }
+  .btn.primary { background: #1D9E75; color: white; border-color: #1D9E75; }
+  .btn.primary:hover { background: #0F6E56; }
+  .gov-card { background: #fff; border: 0.5px solid #d4d2ca; border-radius: 12px; margin-bottom: 10px; overflow: hidden; }
+  .gov-header { display: flex; align-items: center; gap: 10px; padding: 14px 16px; cursor: pointer; }
+  .gov-header:hover { background: #fafaf8; }
+  .gov-body { display: none; padding: 0 16px 16px; border-top: 0.5px solid #e5e3dc; }
+  .gov-body.open { display: block; }
+  .gov-cb { width: 18px; height: 18px; min-width: 18px; border-radius: 4px; border: 1.5px solid #b4b2a9; cursor: pointer; display: flex; align-items: center; justify-content: center; background: #fff; transition: all 0.15s; }
+  .gov-cb.checked { background: #1D9E75; border-color: #1D9E75; }
+  .mini-label { font-size: 11px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; color: #888780; margin-bottom: 6px; margin-top: 14px; }
+  .gov-body-text { font-size: 13px; color: #5f5e5a; line-height: 1.6; }
+  .step-row { display: flex; gap: 9px; padding: 8px 0; border-bottom: 0.5px solid #e5e3dc; }
+  .step-row:last-child { border-bottom: none; }
+  .step-num { width: 22px; height: 22px; min-width: 22px; border-radius: 50%; background: #f8f7f4; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 500; color: #5f5e5a; margin-top: 1px; }
+  .badge { display: inline-block; font-size: 11px; font-weight: 500; padding: 3px 8px; border-radius: 6px; }
+  .badge-risk { background: #FAECE7; color: #712B13; }
+  .badge-med { background: #FAEEDA; color: #633806; }
+  .badge-doc { background: #E1F5EE; color: #085041; }
+  .doc-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+  .nhs-add-form { background: #f8f7f4; border-radius: 8px; padding: 14px; margin-top: 12px; display: none; }
+  .nhs-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 8px; }
+  input, select, textarea { font-family: inherit; font-size: 13px; padding: 7px 10px; border: 0.5px solid #d4d2ca; border-radius: 8px; background: #fff; color: #1a1a18; width: 100%; }
+  input:focus, select:focus { outline: none; border-color: #888780; }
+  .contact-card { background: #fff; border: 0.5px solid #d4d2ca; border-radius: 8px; padding: 12px 14px; margin-bottom: 8px; display: flex; align-items: flex-start; gap: 10px; }
+  .avatar { width: 36px; height: 36px; min-width: 36px; border-radius: 50%; background: #E6F1FB; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 500; color: #0C447C; }
+  .status-know { background: #EAF3DE; color: #27500A; }
+  .status-met { background: #E1F5EE; color: #085041; }
+  .status-need { background: #FAECE7; color: #712B13; }
+  .cost-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px; }
+  .cost-section-label { font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.05em; color: #888780; margin-bottom: 10px; }
+  .cost-row-item { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
+  .cost-row-label { font-size: 13px; color: #5f5e5a; }
+  .cost-input-wrap { display: flex; align-items: center; gap: 4px; }
+  .cost-input { width: 90px; text-align: right; }
+  .result-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 10px; }
+  .result-card { background: #fff; border-radius: 8px; padding: 12px; border: 0.5px solid #e5e3dc; }
+  .result-label { font-size: 11px; color: #888780; margin-bottom: 4px; }
+  .result-val { font-size: 20px; font-weight: 500; }
+  .result-val.highlight { color: #1D9E75; }
+  .cost-note { font-size: 12px; color: #888780; margin-top: 12px; padding-top: 12px; border-top: 0.5px solid #e5e3dc; line-height: 1.6; }
+  .results-bg { background: #f8f7f4; border-radius: 8px; padding: 16px; margin-bottom: 16px; }
+  .filter-row { display: flex; gap: 8px; margin-bottom: 12px; flex-wrap: wrap; align-items: center; }
+  .filter-row select { width: auto; }
+  @media(max-width:560px) { .cost-grid { grid-template-columns: 1fr; } .nhs-grid { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<div class="shell">
+ 
+  <div class="top-bar">
+    <span class="logo-badge">Right at Home</span>
+    <span class="top-title">Complex care development — 90-day toolkit</span>
+  </div>
+ 
+  <div class="nav-row">
+    <button class="nav-tab active" onclick="switchView('tracker')" id="nav-tracker"><i class="ti ti-checklist"></i> 90-day tracker</button>
+    <button class="nav-tab" onclick="switchView('gov')" id="nav-gov"><i class="ti ti-shield-check"></i> Clinical governance</button>
+    <button class="nav-tab" onclick="switchView('nhs')" id="nav-nhs"><i class="ti ti-users"></i> NHS relationship map</button>
+    <button class="nav-tab" onclick="switchView('cost')" id="nav-cost"><i class="ti ti-calculator"></i> Cost model</button>
+  </div>
+ 
+  <!-- TRACKER -->
+  <div class="view active" id="view-tracker">
+    <div class="progress-wrap">
+      <div>
+        <div class="progress-label">Overall progress</div>
+        <div class="progress-val" id="overall-pct">0 of 12 actions complete</div>
+      </div>
+      <div style="width:160px;">
+        <div class="progress-bar"><div class="progress-fill" id="overall-bar" style="width:0%"></div></div>
+      </div>
+    </div>
+    <div class="phase-row">
+      <button class="phase-tab active" onclick="switchPhase(0)" id="tab-0">Days 1–30</button>
+      <button class="phase-tab" onclick="switchPhase(1)" id="tab-1">Days 31–60</button>
+      <button class="phase-tab" onclick="switchPhase(2)" id="tab-2">Days 61–90</button>
+    </div>
+    <div id="phase-header"></div>
+    <div id="actions-list"></div>
+    <div class="action-btns">
+      <button class="btn" onclick="openAsk('I have completed my Stage 1 self-audit for complex care development at Right at Home. Help me interpret my findings and prioritise which compliance gaps to address first.')">Interpret my audit findings ↗</button>
+      <button class="btn" onclick="switchView('gov')"><i class="ti ti-shield-check"></i> Governance foundations</button>
+      <button class="btn" onclick="switchView('cost')"><i class="ti ti-calculator"></i> Cost model</button>
+    </div>
+  </div>
+ 
+  <!-- GOVERNANCE -->
+  <div class="view" id="view-gov">
+    <div class="section-eyebrow">Stage 2 — build phase (days 31–60)</div>
+    <div class="section-title">The six clinical governance foundations</div>
+    <div class="section-sub">Work through each foundation systematically. Click any card to expand full guidance, a step-by-step completion checklist, and the documents you need to produce.</div>
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:18px;">
+      <div class="progress-bar" style="flex:1"><div class="progress-fill" id="gov-bar" style="width:0%"></div></div>
+      <span style="font-size:13px;color:#888780;white-space:nowrap" id="gov-pct">0 of 6 complete</span>
+    </div>
+    <div id="gov-foundations"></div>
+    <div class="action-btns">
+      <button class="btn" onclick="openAsk('I am building a delegation framework for complex care at my Right at Home franchise in England. Help me draft a framework that meets CQC Safe and Well-Led requirements.')">Help draft delegation framework ↗</button>
+      <button class="btn" onclick="openAsk('What does CQC look for in a medicines management policy for a home care provider delivering complex clinical procedures including PEG feeding, catheter care and wound care?')">CQC medicines policy guidance ↗</button>
+      <button class="btn" onclick="openAsk('Help me create a clinical incident reporting and learning process suitable for a Right at Home franchise delivering complex care in England.')">Draft incident process ↗</button>
+    </div>
+  </div>
+ 
+  <!-- NHS MAP -->
+  <div class="view" id="view-nhs">
+    <div class="section-eyebrow">Action 3 — days 1–30</div>
+    <div class="section-title">Your NHS relationship map</div>
+    <div class="section-sub">Record every key NHS contact and be honest about the strength of each relationship. Who do you know well? Who have you met once? Who do you still need to reach?</div>
+    <div class="filter-row">
+      <select id="nhs-type-select" onchange="renderNHS()">
+        <option value="all">All types</option>
+        <option value="community">Community nursing</option>
+        <option value="discharge">Hospital discharge</option>
+        <option value="gp">GP practice</option>
+        <option value="pcn">PCN lead</option>
+        <option value="icb">ICB / commissioner</option>
+      </select>
+      <select id="nhs-status-select" onchange="renderNHS()">
+        <option value="all">All statuses</option>
+        <option value="know">Know well</option>
+        <option value="met">Met once</option>
+        <option value="need">Need to reach</option>
+      </select>
+      <button class="btn" onclick="showAddContact()"><i class="ti ti-plus"></i> Add contact</button>
+    </div>
+    <div id="nhs-list"></div>
+    <div class="nhs-add-form" id="nhs-add-form">
+      <div style="font-size:13px;font-weight:500;margin-bottom:10px;">New contact</div>
+      <div class="nhs-grid">
+        <input id="nc-name" placeholder="Name">
+        <input id="nc-org" placeholder="Organisation">
+      </div>
+      <div class="nhs-grid" style="margin-bottom:8px;">
+        <select id="nc-type">
+          <option value="community">Community nursing</option>
+          <option value="discharge">Hospital discharge</option>
+          <option value="gp">GP practice</option>
+          <option value="pcn">PCN lead</option>
+          <option value="icb">ICB / commissioner</option>
+        </select>
+        <select id="nc-status">
+          <option value="know">Know well</option>
+          <option value="met">Met once</option>
+          <option value="need">Need to reach</option>
+        </select>
+      </div>
+      <input id="nc-notes" placeholder="Notes (optional)" style="margin-bottom:10px;">
+      <div style="display:flex;gap:8px;">
+        <button class="btn primary" onclick="saveContact()">Save contact</button>
+        <button class="btn" onclick="cancelContact()">Cancel</button>
+      </div>
+    </div>
+    <div class="action-btns">
+      <button class="btn" onclick="openAsk('I am a Right at Home franchisee in England wanting to build relationships with NHS community nursing teams to support complex care delegation. What is the most effective approach to making first contact and demonstrating our capability?')">Approaching community nursing teams ↗</button>
+      <button class="btn" onclick="openAsk('What is a Primary Care Network (PCN) and how can a Right at Home franchise build a productive relationship with PCN clinical directors to support complex care clients?')">Understanding PCN relationships ↗</button>
+      <button class="btn" onclick="openAsk('How should I prepare for an ICB provider engagement event as a home care franchisee wanting to access complex care contracts? What should I say, who should I speak to, and what to bring?')">Prepare for my ICB event ↗</button>
+    </div>
+  </div>
+ 
+  <!-- COST MODEL -->
+  <div class="view" id="view-cost">
+    <div class="section-eyebrow">Action 4 — days 31–60</div>
+    <div class="section-title">Complex care cost model</div>
+    <div class="section-sub">Know your floor price before you quote anything. Adjust every input to reflect your actual local costs — the defaults are illustrative only.</div>
+    <div class="cost-grid">
+      <div>
+        <div class="cost-section-label">RN costs</div>
+        <div class="cost-row-item"><span class="cost-row-label">RN salary (annual)</span><div class="cost-input-wrap">£<input class="cost-input" id="rn-salary" type="number" value="42000" oninput="calcCost()"></div></div>
+        <div class="cost-row-item"><span class="cost-row-label">Employer NI + pension</span><div class="cost-input-wrap"><input class="cost-input" id="rn-on-cost" type="number" value="20" oninput="calcCost()">%</div></div>
+        <div class="cost-row-item"><span class="cost-row-label">RN contracted hours/week</span><div class="cost-input-wrap"><input class="cost-input" id="rn-hours" type="number" value="37.5" oninput="calcCost()">hrs</div></div>
+        <div class="cost-section-label" style="margin-top:16px;">Annual fixed overheads</div>
+        <div class="cost-row-item"><span class="cost-row-label">Complex care training</span><div class="cost-input-wrap">£<input class="cost-input" id="training" type="number" value="1500" oninput="calcCost()"></div></div>
+        <div class="cost-row-item"><span class="cost-row-label">Insurance uplift</span><div class="cost-input-wrap">£<input class="cost-input" id="insurance" type="number" value="800" oninput="calcCost()"></div></div>
+      </div>
+      <div>
+        <div class="cost-section-label">Package inputs</div>
+        <div class="cost-row-item"><span class="cost-row-label">Care hours per week</span><div class="cost-input-wrap"><input class="cost-input" id="pkg-hours" type="number" value="10" oninput="calcCost()">hrs</div></div>
+        <div class="cost-row-item"><span class="cost-row-label">Travel cost per hour</span><div class="cost-input-wrap">£<input class="cost-input" id="travel" type="number" value="2.50" step="0.1" oninput="calcCost()"></div></div>
+        <div class="cost-section-label" style="margin-top:16px;">Your target margin</div>
+        <div class="cost-row-item"><span class="cost-row-label">Gross margin %</span><div class="cost-input-wrap"><input class="cost-input" id="margin" type="number" value="25" oninput="calcCost()">%</div></div>
+        <div style="background:#E1F5EE;border-radius:8px;padding:12px;margin-top:12px;">
+          <div style="font-size:12px;color:#085041;line-height:1.55;">A 20–30% margin is typical for complex care in England. Discuss your target with your BGC — NHS-commissioned rates and self-funded rates may require different models.</div>
+        </div>
+      </div>
+    </div>
+    <div class="results-bg">
+      <div class="cost-section-label">Your floor price and target charge rate</div>
+      <div class="result-grid">
+        <div class="result-card"><div class="result-label">RN cost per hour</div><div class="result-val" id="rn-per-hour">£0.00</div></div>
+        <div class="result-card"><div class="result-label">Overhead per hour</div><div class="result-val" id="overhead-per-hour">£0.00</div></div>
+        <div class="result-card"><div class="result-label">Floor price per hour</div><div class="result-val highlight" id="floor-price">£0.00</div><div style="font-size:11px;color:#888780;margin-top:2px;">before margin</div></div>
+        <div class="result-card"><div class="result-label">Target charge rate</div><div class="result-val highlight" id="charge-rate">£0.00</div><div style="font-size:11px;color:#888780;margin-top:2px;">inc. margin</div></div>
+        <div class="result-card"><div class="result-label">Weekly package cost</div><div class="result-val" id="weekly-cost">£0.00</div></div>
+        <div class="result-card"><div class="result-label">Weekly package revenue</div><div class="result-val" id="weekly-rev">£0.00</div></div>
+      </div>
+      <div class="cost-note" id="cost-note"></div>
+    </div>
+    <div class="action-btns">
+      <button class="btn" onclick="openAsk('I am a Right at Home franchisee. My floor price for complex care is coming out at ' + document.getElementById(\'floor-price\').textContent + ' per hour. Help me think through what margin to apply and how to present this to NHS commissioners and to self-funding clients.')">Help me set my margin ↗</button>
+      <button class="btn" onclick="openAsk('What do NHS ICBs typically pay per hour for complex home care packages in England in 2025, and how should a Right at Home franchise position its complex care pricing?')">What does NHS typically pay? ↗</button>
+    </div>
+  </div>
+ 
+</div>
+ 
+<script>
+const phases=[
+  {label:"Foundation audit",sublabel:"Days 1–30",actions:[
+    {id:"a0",title:"Complete the Stage 1 self-audit",detail:"Return to the six questions. Write honest answers: every complex task you're delivering, every delegation agreement or gap, every competency record or gap. Do this before you plan anything else.",tool:null},
+    {id:"a1",title:"Identify and document every compliance gap",detail:"Prioritise by risk — which gaps would leave you exposed tonight if something went wrong? Address those first.",tool:null},
+    {id:"a2",title:"Map your local NHS relationships",detail:"List community nurses who delegate to your team, hospital discharge teams, GP practices, and PCN leads. Who do you know? Who do you need to know?",tool:"nhs"},
+    {id:"a3",title:"Speak to your BGC",detail:"Have a focused conversation about complex care development. Share your audit findings, your ambition, and ask for their honest assessment of where to focus first.",tool:null}
+  ]},
+  {label:"Build and recruit",sublabel:"Days 31–60",actions:[
+    {id:"b0",title:"Build the six clinical governance foundations",detail:"Work through each systematically. Start with the highest-risk gaps from your audit — you don't need all six complete before starting any of them.",tool:"gov"},
+    {id:"b1",title:"Begin the RN recruitment process",detail:"Define the role, write the job description, set hours and scope, begin advertising. Allow 3–4 months if targeting a specific CQC application date.",tool:null},
+    {id:"b2",title:"Attend a local ICB provider engagement event",detail:"Find out when your ICB next holds a provider engagement or market shaping event. Register, attend, and introduce yourself.",tool:null},
+    {id:"b3",title:"Build your cost model",detail:"Before quoting any complex package, attribute RN costs, training investment, insurance uplift, and realistic travel costs. Know your floor price.",tool:"cost"}
+  ]},
+  {label:"Launch",sublabel:"Days 61–90",actions:[
+    {id:"c0",title:"RN appointed with clear scope",detail:"Your RN should be in post, inducted, and operating within a clearly defined role with understood governance responsibilities.",tool:null},
+    {id:"c1",title:"Confirm readiness for first complex client",detail:"Structured conversation with your RN: delegation framework ready, care planning process active, incident protocol tested? If yes — go.",tool:null},
+    {id:"c2",title:"Submit CQC TDDI application if appropriate",detail:"If your model requires TDDI registration, your RN is in post, and governance documentation is ready — submit. Allow 8–16 weeks for assessment.",tool:null},
+    {id:"c3",title:"Set your 6-month caseload target",detail:"Agree with your BGC what a realistic complex care caseload looks like at 6 months. Track monthly, celebrate early wins, use data to refine pricing and referral strategy.",tool:null}
+  ]}
+];
+ 
+const govFoundations=[
+  {id:"g0",title:"Delegation framework",risk:"High priority",riskClass:"badge-risk",icon:"ti-file-certificate",
+   what:"A written agreement between your registered nurse and your care assistants defining exactly which clinical tasks can be delegated, to whom, under what conditions, and with what level of supervision.",
+   why:"Without a formal delegation framework, your care assistants are working outside safe practice and you are exposed under CQC's Safe and Well-Led domains. If anything goes wrong, you have no documented evidence that delegation was appropriate.",
+   steps:[
+    "List every clinical task your team currently delivers or plans to deliver (PEG feeding, catheter care, stoma care, wound care, medication administration etc.)",
+    "For each task, confirm your RN is competent to supervise it and document their professional registration and relevant experience",
+    "Draft a delegation agreement template covering: task, delegatee role, competency requirement, supervision level, and review frequency",
+    "Have your RN sign individual delegation agreements with each care assistant for each delegated task",
+    "Store signed agreements in each care assistant's personnel file and in each relevant client's care plan",
+    "Set a review date — minimum annually, or whenever a task, client, or care assistant changes"
+   ],
+   docs:["Delegation agreement template (per task / per worker)","RN competency record","Task-specific care assistant competency assessments"]
+  },
+  {id:"g1",title:"Competency assessment process",risk:"High priority",riskClass:"badge-risk",icon:"ti-clipboard-check",
+   what:"A structured process for assessing and recording that each care assistant is competent to carry out specific clinical tasks before they deliver them unsupervised.",
+   why:"CQC will ask how you know staff are competent. 'They've been trained' is not sufficient — you need a documented assessment process with evidence of observed practice.",
+   steps:[
+    "For each clinical task, create a written competency assessment tool listing the observable steps and the standard required to pass",
+    "Identify who carries out assessments — your RN is the appropriate assessor for clinical tasks",
+    "Assess each care assistant before they deliver any new clinical task unsupervised: observe practice, sign off, record date and outcome",
+    "Record all assessments in an individual competency log for each worker — this is a key document at CQC inspection",
+    "Plan for reassessment: at least annually, after any clinical incident, after a period of absence, or when practice concerns arise",
+    "Ensure new starters do not deliver clinical tasks until their competency is formally signed off"
+   ],
+   docs:["Competency assessment tools (per task)","Individual competency logs","Assessor competency record (for your RN)"]
+  },
+  {id:"g2",title:"Clinical care planning",risk:"High priority",riskClass:"badge-risk",icon:"ti-notes",
+   what:"A care planning process that captures clinical need, associated risk, and the specific clinical interventions required — distinct from and more detailed than a standard social care plan.",
+   why:"Complex clients have higher acuity needs. A generic care plan will not adequately direct care assistants. CQC expects care plans to reflect clinical complexity and demonstrate person-centred risk assessment.",
+   steps:[
+    "Review your current care plan template — does it have fields for clinical diagnosis, specific clinical interventions, delegation instructions, and clinical risk?",
+    "Develop a clinical addendum or a dedicated clinical section for any client receiving complex care",
+    "Ensure your RN is involved in — or signs off — every clinical care plan for complex clients",
+    "Record condition-specific risk assessments: pressure area risk, falls risk, nutritional risk, infection control considerations",
+    "Ensure care plans are reviewed at every significant change in clinical condition, not just annually",
+    "Document a clear escalation pathway in each plan so care assistants know exactly when and how to report deterioration"
+   ],
+   docs:["Clinical care plan template / addendum","Clinical risk assessment tools","Escalation and deterioration protocol (per client)"]
+  },
+  {id:"g3",title:"Medicines management policy",risk:"High priority",riskClass:"badge-risk",icon:"ti-pill",
+   what:"A policy covering how your service manages medicines administration, including prompted administration, specialist routes (PEG, nebuliser, insulin), storage, recording, and error reporting.",
+   why:"Medicines errors are one of the most common causes of safeguarding referrals and CQC enforcement action. A comprehensive, up-to-date medicines policy is a baseline CQC expectation for any provider delivering clinical care.",
+   steps:[
+    "Audit your current medicines policy — does it cover all administration routes your team uses or plans to use?",
+    "Ensure the policy addresses: consent, MAR chart completion, controlled drugs, covert administration, PRN medicines, and specialist administration routes",
+    "Have your RN review and sign off the policy as clinically appropriate",
+    "Train all care assistants on the policy — document the training and test understanding",
+    "Establish a medicines error reporting process: what counts as an error, how it is reported, how it is investigated, and how learning is shared",
+    "Review and update the policy at least annually or whenever you add new clinical procedures"
+   ],
+   docs:["Medicines management policy","MAR chart template","Medicines error / near miss reporting form","Medicines training record"]
+  },
+  {id:"g4",title:"Clinical incident reporting and learning",risk:"Medium priority",riskClass:"badge-med",icon:"ti-alert-triangle",
+   what:"A process for identifying, reporting, investigating, and learning from clinical incidents, near misses, and adverse events involving complex care clients.",
+   why:"CQC's Well-Led domain specifically examines learning from incidents. You need to demonstrate not just that incidents are reported, but that the organisation learns and practice improves as a result.",
+   steps:[
+    "Define what counts as a clinical incident in your service — be clear, specific, and write it down",
+    "Create a simple incident reporting form that care assistants can complete quickly and confidently",
+    "Establish who reviews incident reports, in what timeframe, and what triggers an immediate escalation",
+    "Involve your RN in all clinical incident investigations — they should assess whether the clinical outcome was appropriate and what practice changes are needed",
+    "Document your investigations and the actions taken, and maintain a log",
+    "Share learning with the team in a structured way — a brief at team meeting, a written update, or a change to a protocol — and record that you did so"
+   ],
+   docs:["Clinical incident report form","Incident log","RCA / investigation template","Learning from incidents communication record"]
+  },
+  {id:"g5",title:"Infection prevention and control",risk:"Medium priority",riskClass:"badge-med",icon:"ti-virus-off",
+   what:"Policies and practical training ensuring your care assistants apply appropriate infection prevention and control (IPC) measures when carrying out clinical procedures.",
+   why:"Clinical procedures carry infection risk that standard personal care does not. CQC expects clear IPC protocols for any invasive or quasi-invasive care, and care assistants must be demonstrably competent in their application.",
+   steps:[
+    "Review your existing IPC policy — does it specifically address clinical procedures (catheter care, wound care, PEG etc.) or only standard social care?",
+    "For each clinical task, add a procedure-specific IPC section: what PPE is required, what aseptic technique applies, how to dispose of clinical waste",
+    "Ensure care assistants are trained in standard precautions and any additional precautions relevant to specific clients (e.g. MRSA, C. diff)",
+    "Conduct an annual IPC audit — or use a supervised client visit to check compliance in practice",
+    "Establish a clinical waste disposal process that meets Environment Agency requirements and your local authority's collection arrangements",
+    "Document training, audits, and any IPC incidents in your governance records"
+   ],
+   docs:["IPC policy (clinical procedures section)","PPE guidance per procedure","Clinical waste disposal procedure","IPC audit tool","IPC training record"]
+  }
+];
+ 
+const nhsContacts=[];
+const govCompleted=new Set();
+const actionCompleted=new Set();
+let currentPhase=0;
+ 
+function switchView(v){
+  ['tracker','gov','nhs','cost'].forEach(n=>{
+    document.getElementById('view-'+n).classList.toggle('active',n===v);
+    document.getElementById('nav-'+n).classList.toggle('active',n===v);
+  });
+  if(v==='gov') renderGov();
+  if(v==='nhs') renderNHS();
+  if(v==='cost') calcCost();
+}
+ 
+function switchPhase(i){
+  currentPhase=i;
+  document.querySelectorAll('.phase-tab').forEach((t,idx)=>t.classList.toggle('active',idx===i));
+  renderPhase();
+}
+ 
+function renderPhase(){
+  const p=phases[currentPhase];
+  const done=p.actions.filter(a=>actionCompleted.has(a.id)).length;
+  document.getElementById('phase-header').innerHTML=`<div style="font-size:11px;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;color:#888780;margin-bottom:12px;">${p.sublabel} — ${p.label} &nbsp;·&nbsp; ${done} of ${p.actions.length} complete</div>`;
+  document.getElementById('actions-list').innerHTML=p.actions.map((a,i)=>{
+    const d=actionCompleted.has(a.id);
+    const toolMap={gov:'Governance foundations',nhs:'NHS map',cost:'Cost model'};
+    const toolBtn=a.tool?`<button class="tool-btn" onclick="event.stopPropagation();switchView('${a.tool}')"><i class="ti ti-arrow-right"></i> Open ${toolMap[a.tool]}</button>`:'';
+    return`<div class="action-row" onclick="toggleAction('${a.id}')">
+      <div class="cb ${d?'checked':''}">${d?'<svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>':''}</div>
+      <div style="flex:1">
+        <div class="action-title ${d?'done-text':''}">Action ${i+1} — ${a.title}</div>
+        <div class="action-detail ${d?'done-text':''}">${a.detail}</div>
+        ${toolBtn}
+      </div>
+    </div>`;
+  }).join('');
+}
+ 
+function toggleAction(id){
+  actionCompleted.has(id)?actionCompleted.delete(id):actionCompleted.add(id);
+  const total=phases.flatMap(p=>p.actions).length;
+  const done=actionCompleted.size;
+  document.getElementById('overall-pct').textContent=`${done} of ${total} actions complete`;
+  document.getElementById('overall-bar').style.width=`${Math.round((done/total)*100)}%`;
+  renderPhase();
+}
+ 
+function renderGov(){
+  const done=govCompleted.size;
+  document.getElementById('gov-pct').textContent=`${done} of 6 complete`;
+  document.getElementById('gov-bar').style.width=`${Math.round((done/6)*100)}%`;
+  document.getElementById('gov-foundations').innerHTML=govFoundations.map(f=>{
+    const d=govCompleted.has(f.id);
+    return`<div class="gov-card">
+      <div class="gov-header" onclick="toggleGovCard('${f.id}')">
+        <div class="gov-cb ${d?'checked':''}" onclick="event.stopPropagation();toggleGov('${f.id}')" title="${d?'Mark incomplete':'Mark complete'}">${d?'<svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>':''}</div>
+        <i class="ti ${f.icon}" style="font-size:18px;color:#888780"></i>
+        <div style="flex:1">
+          <div style="font-size:14px;font-weight:500;${d?'text-decoration:line-through;color:#b4b2a9':''}">${f.title}</div>
+        </div>
+        <span class="badge ${f.riskClass}" style="margin-right:8px">${f.risk}</span>
+        <i class="ti ti-chevron-down" style="font-size:16px;color:#b4b2a9"></i>
+      </div>
+      <div class="gov-body" id="gb-${f.id}">
+        <div class="mini-label">What it is</div>
+        <div class="gov-body-text">${f.what}</div>
+        <div class="mini-label">Why it matters</div>
+        <div class="gov-body-text">${f.why}</div>
+        <div class="mini-label">How to complete it</div>
+        <div>${f.steps.map((s,i)=>`<div class="step-row"><div class="step-num">${i+1}</div><div class="gov-body-text">${s}</div></div>`).join('')}</div>
+        <div class="mini-label">Documents you need to produce</div>
+        <div class="doc-tags">${f.docs.map(d=>`<span class="badge badge-doc"><i class="ti ti-file" style="font-size:11px;margin-right:3px"></i>${d}</span>`).join('')}</div>
+      </div>
+    </div>`;
+  }).join('');
+}
+ 
+function toggleGovCard(id){
+  document.getElementById('gb-'+id).classList.toggle('open');
+}
+ 
+function toggleGov(id){
+  govCompleted.has(id)?govCompleted.delete(id):govCompleted.add(id);
+  renderGov();
+}
+ 
+function renderNHS(){
+  const typeF=document.getElementById('nhs-type-select').value;
+  const statusF=document.getElementById('nhs-status-select').value;
+  const filtered=nhsContacts.filter(c=>(typeF==='all'||c.type===typeF)&&(statusF==='all'||c.status===statusF));
+  const statusLabel={know:'Know well',met:'Met once',need:'Need to reach'};
+  const statusClass={know:'status-know',met:'status-met',need:'status-need'};
+  const typeLabel={community:'Community nursing',discharge:'Hospital discharge',gp:'GP practice',pcn:'PCN lead',icb:'ICB / commissioner'};
+  if(filtered.length===0){
+    document.getElementById('nhs-list').innerHTML=`<div style="text-align:center;padding:32px;color:#b4b2a9;font-size:13px;">${nhsContacts.length===0?'No contacts yet — add your first NHS contact above.':'No contacts match your filters.'}</div>`;
+    return;
+  }
+  document.getElementById('nhs-list').innerHTML=filtered.map(c=>`
+    <div class="contact-card">
+      <div class="avatar">${c.name.split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase()}</div>
+      <div style="flex:1">
+        <div style="font-size:14px;font-weight:500;margin-bottom:2px;">${c.name}</div>
+        <div style="font-size:12px;color:#888780;margin-bottom:${c.notes?'5px':'0'}">${c.org}${c.org&&c.type?' · ':''}${typeLabel[c.type]||''}</div>
+        ${c.notes?`<div style="font-size:12px;color:#5f5e5a;font-style:italic">${c.notes}</div>`:''}
+      </div>
+      <span class="badge ${statusClass[c.status]}">${statusLabel[c.status]}</span>
+    </div>`).join('');
+}
+ 
+function showAddContact(){document.getElementById('nhs-add-form').style.display='block';document.getElementById('nc-name').focus();}
+function cancelContact(){document.getElementById('nhs-add-form').style.display='none';}
+function saveContact(){
+  const name=document.getElementById('nc-name').value.trim();
+  if(!name){document.getElementById('nc-name').focus();return;}
+  nhsContacts.push({name,org:document.getElementById('nc-org').value.trim(),type:document.getElementById('nc-type').value,status:document.getElementById('nc-status').value,notes:document.getElementById('nc-notes').value.trim()});
+  ['nc-name','nc-org','nc-notes'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('nhs-add-form').style.display='none';
+  renderNHS();
+}
+ 
+function calcCost(){
+  const salary=parseFloat(document.getElementById('rn-salary').value)||0;
+  const onCostPct=(parseFloat(document.getElementById('rn-on-cost').value)||0)/100;
+  const rnHours=parseFloat(document.getElementById('rn-hours').value)||37.5;
+  const pkgHours=parseFloat(document.getElementById('pkg-hours').value)||0;
+  const travel=parseFloat(document.getElementById('travel').value)||0;
+  const training=parseFloat(document.getElementById('training').value)||0;
+  const insurance=parseFloat(document.getElementById('insurance').value)||0;
+  const marginPct=(parseFloat(document.getElementById('margin').value)||0)/100;
+  const totalRN=salary*(1+onCostPct);
+  const annualHours=rnHours*52;
+  const rnPerHour=annualHours>0?totalRN/annualHours:0;
+  const annualOverheads=training+insurance;
+  const weeklyPkgHours=pkgHours*52;
+  const overheadPerHour=weeklyPkgHours>0?annualOverheads/weeklyPkgHours:0;
+  const floor=rnPerHour+overheadPerHour+travel;
+  const chargeRate=marginPct<1?floor/(1-marginPct):floor;
+  const weekly=floor*pkgHours;
+  const weeklyRev=chargeRate*pkgHours;
+  document.getElementById('rn-per-hour').textContent='£'+rnPerHour.toFixed(2);
+  document.getElementById('overhead-per-hour').textContent='£'+(overheadPerHour+travel).toFixed(2);
+  document.getElementById('floor-price').textContent='£'+floor.toFixed(2);
+  document.getElementById('charge-rate').textContent='£'+chargeRate.toFixed(2);
+  document.getElementById('weekly-cost').textContent='£'+weekly.toFixed(2);
+  document.getElementById('weekly-rev').textContent='£'+weeklyRev.toFixed(2);
+  document.getElementById('cost-note').textContent=`At a ${Math.round(marginPct*100)}% margin your weekly gross profit on this package is £${(weeklyRev-weekly).toFixed(2)}. Annualised that is £${((weeklyRev-weekly)*52).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g,',')}. These figures exclude your standard hourly care rate — the model shows only the additional complexity cost layer. Always validate against actual payroll and your ASF obligations.`;
+}
+ 
+function openAsk(prompt){
+  const w=window.open('','_blank');
+  if(w){w.document.write(`<script>window.location='https://claude.ai/new?q='+encodeURIComponent(${JSON.stringify(prompt)})<\/script>`);}
+}
+ 
+renderPhase();
+renderNHS();
+calcCost();
+</script>
+</body>
+</html>
