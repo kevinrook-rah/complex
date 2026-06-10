@@ -10,17 +10,11 @@
 
 <style>
 
-*,*::before,*::after{
-box-sizing:border-box;
-margin:0;
-padding:0;
-}
-
 body{
 font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
 background:#f8f7f4;
 color:#1a1a18;
-min-height:100vh;
+margin:0;
 }
 
 .shell{
@@ -31,11 +25,11 @@ padding:28px 20px 80px;
 
 .logo-badge{
 background:#1D9E75;
-color:#fff;
-font-size:11px;
-font-weight:600;
+color:white;
 padding:4px 10px;
 border-radius:6px;
+font-size:11px;
+font-weight:600;
 }
 
 .top-title{
@@ -45,145 +39,78 @@ font-weight:500;
 
 .top-bar{
 display:flex;
-align-items:center;
 gap:10px;
+align-items:center;
 margin-bottom:24px;
 }
 
-.setup-card,
-.org-card,
-.loading-card,
-.event-card,
-.stat-card{
+.card{
 background:#fff;
-border:.5px solid #d4d2ca;
+border:1px solid #ddd;
 border-radius:12px;
+padding:18px;
+margin-bottom:12px;
 }
 
-.setup-card{
-padding:28px;
-max-width:620px;
-margin:auto;
-}
-
-.setup-field{
-margin-bottom:16px;
-}
-
-.setup-field label{
-display:block;
-font-size:12px;
-font-weight:600;
-margin-bottom:6px;
-color:#888780;
-text-transform:uppercase;
-}
-
-.setup-field input,
-.setup-field select{
+input,select{
 width:100%;
 padding:10px 12px;
 border-radius:8px;
-border:.5px solid #d4d2ca;
-background:#f8f7f4;
+border:1px solid #ccc;
+margin-top:6px;
+margin-bottom:14px;
 font-family:inherit;
 }
 
-.loc-add-row{
-display:flex;
-gap:8px;
-}
-
-.loc-chips{
-display:flex;
-flex-wrap:wrap;
-gap:6px;
-margin-top:8px;
-}
-
-.loc-chip{
-background:#E1F5EE;
-color:#085041;
-padding:4px 10px;
-border-radius:20px;
-font-size:12px;
-display:flex;
-align-items:center;
-gap:5px;
-}
-
-.loc-chip button{
-border:none;
-background:none;
-cursor:pointer;
-color:#085041;
-}
-
-.btn{
-font-family:inherit;
-font-size:13px;
-padding:9px 14px;
-border-radius:8px;
-border:.5px solid #d4d2ca;
-cursor:pointer;
-background:#fff;
-display:inline-flex;
-align-items:center;
-gap:6px;
-}
-
-.btn.primary{
+button{
 background:#1D9E75;
-border-color:#1D9E75;
-color:#fff;
+color:white;
+border:none;
+padding:10px 14px;
+border-radius:8px;
+cursor:pointer;
+font-family:inherit;
 }
 
-.user-bar{
-display:flex;
-align-items:center;
-gap:10px;
-flex-wrap:wrap;
-margin-bottom:20px;
-background:#fff;
-border:.5px solid #d4d2ca;
-padding:12px 16px;
-border-radius:12px;
+button:hover{
+background:#0F6E56;
 }
 
 .loc-tabs{
 display:flex;
 gap:6px;
 flex-wrap:wrap;
+margin-bottom:20px;
 }
 
 .loc-tab{
-padding:5px 12px;
+padding:6px 12px;
 border-radius:20px;
-border:.5px solid #d4d2ca;
-background:#f8f7f4;
+border:1px solid #ccc;
 cursor:pointer;
+background:#fff;
 font-size:12px;
 }
 
 .loc-tab.active{
 background:#1D9E75;
-color:#fff;
+color:white;
 border-color:#1D9E75;
 }
 
 .nav-row{
 display:flex;
 gap:8px;
-flex-wrap:wrap;
 margin-bottom:20px;
+flex-wrap:wrap;
 }
 
 .nav-tab{
 padding:8px 14px;
 border-radius:8px;
-border:.5px solid #d4d2ca;
-background:#eeecea;
+border:1px solid #ccc;
 cursor:pointer;
+background:#f0f0f0;
 }
 
 .nav-tab.active{
@@ -200,7 +127,7 @@ display:block;
 
 .section-title{
 font-size:22px;
-margin-bottom:6px;
+margin-bottom:8px;
 }
 
 .section-sub{
@@ -210,23 +137,22 @@ margin-bottom:20px;
 line-height:1.6;
 }
 
-.loading-card{
-padding:24px;
-}
-
 .org-card{
+background:#fff;
+border:1px solid #ddd;
+border-radius:10px;
 padding:16px;
 margin-bottom:10px;
 }
 
 .badge{
 display:inline-block;
-font-size:11px;
-font-weight:600;
-padding:3px 8px;
-border-radius:20px;
 background:#E1F5EE;
 color:#085041;
+padding:3px 8px;
+border-radius:20px;
+font-size:11px;
+font-weight:600;
 margin-bottom:8px;
 }
 
@@ -238,7 +164,7 @@ margin-bottom:4px;
 
 .org-meta{
 font-size:12px;
-color:#888780;
+color:#888;
 margin-bottom:10px;
 }
 
@@ -251,31 +177,38 @@ line-height:1.6;
 margin-bottom:10px;
 }
 
-.action-bar{
-display:flex;
-gap:8px;
-flex-wrap:wrap;
-margin-top:20px;
-}
-
-.event-card{
-padding:16px;
-margin-bottom:10px;
-}
-
-.pulse{
+.link-btn{
 display:inline-block;
-width:8px;
-height:8px;
-border-radius:50%;
-background:#1D9E75;
-margin-right:8px;
-animation:pulse 1.2s infinite;
+font-size:12px;
+color:#1D9E75;
+text-decoration:none;
+margin-right:12px;
+margin-top:6px;
 }
 
-@keyframes pulse{
-0%,100%{opacity:1}
-50%{opacity:.3}
+.stats{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
+gap:10px;
+margin-bottom:20px;
+}
+
+.stat{
+background:#fff;
+padding:16px;
+border-radius:10px;
+border:1px solid #ddd;
+}
+
+.stat-number{
+font-size:24px;
+font-weight:600;
+}
+
+.stat-label{
+font-size:12px;
+color:#666;
+margin-top:4px;
 }
 
 </style>
@@ -292,73 +225,63 @@ NHS & Private Referral Engagement Tool
 </span>
 </div>
 
-<!-- SETUP -->
+<div class="card">
 
-<div id="setup-screen">
-
-<div class="setup-card">
-
-<div class="setup-field">
 <label>Email address</label>
-<input id="setup-email" placeholder="you@rightathome.co.uk">
-</div>
+<input id="email" placeholder="you@rightathome.co.uk">
 
-<div class="setup-field">
+<label>Territory</label>
 
-<label>Franchise locations</label>
-
-<div class="loc-chips" id="loc-chips"></div>
-
-<div class="loc-add-row">
-
-<select id="loc-select">
-<option value="">Select location</option>
+<select id="location">
+<option>Stockport</option>
+<option>Sefton</option>
+<option>Guildford & Farnham</option>
+<option>Central London</option>
+<option>Reading & Wokingham</option>
+<option>Portsmouth</option>
+<option>Oxford</option>
+<option>Solihull</option>
+<option>Southampton</option>
+<option>Bromley</option>
 </select>
 
-<button class="btn" onclick="addLocation()">
-Add
+<button onclick="startTool()">
+Build engagement map
 </button>
 
 </div>
 
+<div id="app" style="display:none">
+
+<div class="loc-tabs">
+<div class="loc-tab active">
+Current territory
 </div>
-
-<button class="btn primary"
-onclick="initTool()"
-style="width:100%;justify-content:center">
-
-Build my engagement map
-
-</button>
-
-</div>
-
-</div>
-
-<!-- MAIN -->
-
-<div id="main-tool" style="display:none">
-
-<div class="user-bar">
-
-<div id="user-email-display"
-style="font-size:13px;color:#666"></div>
-
-<div class="loc-tabs" id="loc-tabs"></div>
-
 </div>
 
 <div class="nav-row">
 
 <button class="nav-tab active"
-id="nav-intel"
-onclick="switchView('intel')">
+onclick="switchView('intel')"
+id="nav-intel">
 Local intelligence
 </button>
 
 <button class="nav-tab"
-id="nav-events"
-onclick="switchView('events')">
+onclick="switchView('tracker')"
+id="nav-tracker">
+Contact tracker
+</button>
+
+<button class="nav-tab"
+onclick="switchView('guides')"
+id="nav-guides">
+Approach guides
+</button>
+
+<button class="nav-tab"
+onclick="switchView('events')"
+id="nav-events">
 Local events
 </button>
 
@@ -368,15 +291,92 @@ Local events
 
 <div class="view active" id="view-intel">
 
-<div class="section-title" id="intel-title">
+<div class="section-title">
 Your referral landscape
 </div>
 
 <div class="section-sub">
-Structured local referral opportunities for your territory.
+Structured referral opportunities and direct research links for your territory.
 </div>
 
 <div id="intel-content"></div>
+
+</div>
+
+<!-- TRACKER -->
+
+<div class="view" id="view-tracker">
+
+<div class="section-title">
+Contact tracker
+</div>
+
+<div class="section-sub">
+Track referral relationships and engagement activity.
+</div>
+
+<div class="stats">
+
+<div class="stat">
+<div class="stat-number">12</div>
+<div class="stat-label">Priority organisations</div>
+</div>
+
+<div class="stat">
+<div class="stat-number">4</div>
+<div class="stat-label">High-priority NHS targets</div>
+</div>
+
+<div class="stat">
+<div class="stat-number">3</div>
+<div class="stat-label">Community opportunities</div>
+</div>
+
+</div>
+
+</div>
+
+<!-- GUIDES -->
+
+<div class="view" id="view-guides">
+
+<div class="section-title">
+Approach guides
+</div>
+
+<div class="section-sub">
+Suggested positioning and engagement approaches.
+</div>
+
+<div class="org-card">
+<div class="org-name">
+NHS discharge teams
+</div>
+
+<div class="approach-box">
+Position Right at Home as a reliable discharge partner capable of rapid mobilisation and high-quality outcomes.
+</div>
+</div>
+
+<div class="org-card">
+<div class="org-name">
+GP practices
+</div>
+
+<div class="approach-box">
+Focus on continuity, prevention of admission, and support for vulnerable patients at home.
+</div>
+</div>
+
+<div class="org-card">
+<div class="org-name">
+Solicitors
+</div>
+
+<div class="approach-box">
+Position yourself as the trusted local solution for families navigating later-life decisions.
+</div>
+</div>
 
 </div>
 
@@ -389,7 +389,7 @@ Local events & forums
 </div>
 
 <div class="section-sub">
-Networking and NHS engagement opportunities.
+Networking and provider engagement opportunities.
 </div>
 
 <div id="events-content"></div>
@@ -402,400 +402,159 @@ Networking and NHS engagement opportunities.
 
 <script>
 
-const RAH_LOCATIONS = [
-"Ards & North Down",
-"Ashby, Burton & Uttoxeter",
-"Aylesbury Vale and Chiltern",
-"Basingstoke",
-"Bromley",
-"Central London",
-"Guildford & Farnham",
-"Oxford",
-"Portsmouth",
-"Reading & Wokingham",
-"Sefton",
-"Solihull",
-"Southampton",
-"Stockport",
-"Wimbledon, Putney and Kingston"
-].sort();
-
-let state = {
-email:'',
-locations:[],
-activeLocation:''
-};
-
-function $(id){
-return document.getElementById(id);
-}
-
-(function(){
-
-const sel = $('loc-select');
-
-RAH_LOCATIONS.forEach(loc => {
-
-const opt = document.createElement('option');
-
-opt.value = loc;
-opt.textContent = loc;
-
-sel.appendChild(opt);
-
-});
-
-})();
-
-function addLocation(){
-
-const val = $('loc-select').value;
-
-if(!val) return;
-
-if(state.locations.includes(val)) return;
-
-state.locations.push(val);
-
-renderLocationChips();
-
-}
-
-function removeLocation(loc){
-
-state.locations =
-state.locations.filter(x => x !== loc);
-
-renderLocationChips();
-
-}
-
-function renderLocationChips(){
-
-$('loc-chips').innerHTML =
-state.locations.map(loc => `
-<div class="loc-chip">
-${loc}
-<button onclick="removeLocation('${loc}')">
-×
-</button>
-</div>
-`).join('');
-
-}
-
-function renderLocationTabs(){
-
-$('loc-tabs').innerHTML =
-state.locations.map(loc => `
-<button class="loc-tab ${loc===state.activeLocation?'active':''}"
-onclick="switchLocation('${loc}')">
-${loc}
-</button>
-`).join('');
-
-}
-
-function initTool(){
-
-const email =
-$('setup-email').value.trim();
-
-if(!email.includes('@')){
-
-alert('Enter a valid email');
-
-return;
-
-}
-
-if(!state.locations.length){
-
-alert('Add at least one location');
-
-return;
-
-}
-
-state.email = email;
-
-state.activeLocation =
-state.locations[0];
-
-$('setup-screen').style.display='none';
-
-$('main-tool').style.display='block';
-
-$('user-email-display').textContent =
-email;
-
-renderLocationTabs();
-
-loadIntelligence(state.activeLocation);
-
-loadEvents(state.activeLocation);
-
-}
-
-function switchLocation(loc){
-
-state.activeLocation = loc;
-
-renderLocationTabs();
-
-loadIntelligence(loc);
-
-loadEvents(loc);
-
-}
-
 function switchView(view){
 
-['intel','events'].forEach(v => {
+['intel','tracker','guides','events']
+.forEach(v => {
 
-$('view-'+v).classList.toggle(
-'active',
-v===view
-);
+document
+.getElementById('view-'+v)
+.classList.toggle('active',v===view);
 
-$('nav-'+v).classList.toggle(
-'active',
-v===view
-);
+document
+.getElementById('nav-'+v)
+.classList.toggle('active',v===view);
 
 });
 
 }
 
-function buildGoogleLink(query){
+function google(query){
 
 return 'https://www.google.com/search?q=' +
 encodeURIComponent(query);
 
 }
 
-function renderCategory(title,items){
+function card(title,type,desc,query){
 
 return `
 <div class="org-card">
 
-<h3 style="margin-bottom:14px">
-${title}
-</h3>
-
-${items.map(item => `
-
-<div style="margin-bottom:18px">
-
 <div class="badge">
-Referral opportunity
+${type}
 </div>
 
 <div class="org-name">
-${item.name}
+${title}
 </div>
 
 <div class="org-meta">
-${item.type}
+Local referral opportunity
 </div>
 
 <div class="approach-box">
-${item.description}
+${desc}
 </div>
 
-<a href="${item.link}"
+<a class="link-btn"
 target="_blank"
-style=")}
+href="${googleearch organisation
+
+</a>
+
+<a class="link-btn"
+target="_blank"
+href="${google(query + ' contacts
+
+</a>
 
 </div>
 `;
 
 }
 
-async function loadIntelligence(loc){
+function startTool(){
 
-$('intel-title').textContent =
-'Your referral landscape — ' + loc;
+const loc =
+document.getElementById('location').value;
 
-$('intel-content').innerHTML = `
-<div class="loading-card">
-<span class="pulse"></span>
-Building local intelligence for ${loc}...
-</div>
-`;
+document.getElementById('app')
+.style.display='block';
 
-await new Promise(r=>setTimeout(r,600));
+const intel = [
 
-const categories = [
-
-{
-title:'NHS organisations',
-items:[
-{
-name:'NHS discharge teams',
-type:'Tier 1 — NHS',
-description:'Hospital discharge teams are one of the highest-volume referral routes for funded care packages.',
-link:buildGoogleLink(
+card(
+'NHS discharge teams',
+'Tier 1 — NHS',
+'High-volume referral route for funded packages and rapid-start care.',
 `NHS discharge team ${loc}`
-)
-},
-{
-name:'Integrated Care Board',
-type:'Tier 1 — Commissioning',
-description:'ICBs manage commissioning and provider engagement opportunities.',
-link:buildGoogleLink(
+),
+
+card(
+'Integrated Care Board',
+'Tier 1 — Commissioning',
+'Strategic commissioning and provider engagement opportunities.',
 `ICB ${loc}`
-)
-}
-]
-},
+),
 
-{
-title:'GP practices & PCNs',
-items:[
-{
-name:'Primary Care Networks',
-type:'Tier 1 — Primary care',
-description:'PCNs and social prescribing teams regularly identify patients needing support at home.',
-link:buildGoogleLink(
+card(
+'GP practices & PCNs',
+'Tier 1 — Primary care',
+'Social prescribing and frailty pathways regularly surface care needs.',
 `Primary Care Network ${loc}`
-)
-},
-{
-name:'GP practices',
-type:'Tier 1 — Community referrals',
-description:'Practice managers and link workers can become valuable local referral partners.',
-link:buildGoogleLink(
-`GP practice ${loc}`
-)
-}
-]
-},
+),
 
-{
-title:'Private hospitals & clinics',
-items:[
-{
-name:'Private hospitals',
-type:'Tier 2 — Self-funding',
-description:'Post-surgical patients often require short-term or ongoing support at home.',
-link:buildGoogleLink(
+card(
+'Private hospitals',
+'Tier 2 — Self-funding',
+'Post-surgical patients frequently require home support.',
 `private hospital ${loc}`
-)
-},
-{
-name:'Physiotherapy clinics',
-type:'Tier 2 — Recovery pathways',
-description:'Physiotherapists regularly identify patients struggling at home.',
-link:buildGoogleLink(
-`physiotherapy clinic ${loc}`
-)
-}
-]
-},
+),
 
-{
-title:'Solicitors',
-items:[
-{
-name:'Probate solicitors',
-type:'Tier 2 — Elderly clients',
-description:'Private client and probate teams frequently support families needing care guidance.',
-link:buildGoogleLink(
+card(
+'Probate solicitors',
+'Tier 2 — Legal',
+'Families often seek care guidance during probate and LPA discussions.',
 `probate solicitor ${loc}`
-)
-}
-]
-},
+),
 
-{
-title:'Dementia & carers groups',
-items:[
-{
-name:'Dementia cafés',
-type:'Tier 1 — Community engagement',
-description:'Families attending dementia groups are often close to requiring paid care support.',
-link:buildGoogleLink(
+card(
+'Dementia cafés',
+'Tier 1 — Community',
+'Families attending support groups are often approaching care decisions.',
 `dementia cafe ${loc}`
+),
+
+card(
+'Retirement housing',
+'Tier 2 — Retirement living',
+'Scheme managers are frequently asked for care recommendations.',
+`retirement village ${loc}`
 )
-},
-{
-name:'Age UK branches',
-type:'Tier 1 — Older adult support',
-description:'Local support organisations can become trusted referral relationships.',
-link:buildGoogleLink(
-`Age UK ${loc}`
-)
-}
-]
-}
 
 ];
 
-$('intel-content').innerHTML =
-categories.map(cat =>
-renderCategory(cat.title,cat.items)
-).join('');
-
-}
-
-async function loadEvents(loc){
-
-$('events-content').innerHTML = `
-<div class="loading-card">
-<span class="pulse"></span>
-Searching local networking opportunities...
-</div>
-`;
-
-await new Promise(r=>setTimeout(r,600));
+document.getElementById('intel-content')
+.innerHTML = intel.join('');
 
 const events = [
 
-{
-title:'ICB provider forums',
-description:'Commissioning and provider engagement sessions.',
-link:buildGoogleLink(
+card(
+'ICB provider forums',
+'Networking',
+'Provider engagement and commissioning visibility.',
 `ICB provider forum ${loc}`
-)
-},
+),
 
-{
-title:'Health & social care networking',
-description:'Local healthcare collaboration events.',
-link:buildGoogleLink(
+card(
+'Health & social care networking',
+'Business development',
+'Build relationships with healthcare stakeholders.',
 `health social care networking ${loc}`
-)
-},
+),
 
-{
-title:'Dementia alliance meetings',
-description:'Community dementia engagement opportunities.',
-link:buildGoogleLink(
+card(
+'Dementia Action Alliance',
+'Community engagement',
+'Connect with dementia support stakeholders.',
 `Dementia Action Alliance ${loc}`
 )
-}
 
 ];
 
-$('events-content').innerHTML =
-events.map(e => `
-<div class="event-card">
-
-<div class="org-name">
-${e.title}
-</div>
-
-<div class="approach-box">
-${e.description}
-</div>
-
-<a href="${e.link}"
-target="_blank"
-style="font-size:12px;color:#>
-
-</div>
-`).join('');
+document.getElementById('events-content')
+.innerHTML = events.join('');
 
 }
 
